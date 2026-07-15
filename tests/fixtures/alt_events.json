@@ -1,0 +1,47 @@
+[
+  {
+    "alert_id": "a1",
+    "start_ms": 100,
+    "end_ms": "290",
+    "severity": "P1",
+    "env": "lab",
+    "signature": "root trust anchor uplift",
+    "muted": false
+  },
+  {
+    "alert_id": "a2",
+    "start_ms": 260,
+    "end_ms": 470,
+    "severity": "p2",
+    "env": "lab",
+    "signature": "csr token replay",
+    "muted": false
+  },
+  {
+    "alert_id": "a3",
+    "start_ms": 520,
+    "end_ms": 590,
+    "severity": "p3",
+    "env": "lab",
+    "signature": "noise",
+    "muted": false
+  },
+  {
+    "alert_id": "a4",
+    "start_ms": 600,
+    "end_ms": " 910 ",
+    "severity": "p2",
+    "env": "edge",
+    "signature": "rotation drift burst",
+    "muted": "yes"
+  },
+  {
+    "alert_id": "a4",
+    "start_ms": 600,
+    "end_ms": " 910 ",
+    "severity": "p2",
+    "env": "edge",
+    "signature": "rotation drift burst z",
+    "muted": false
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {"source_env": "prod", "target_env": "dmz", "weight": 5},
+  {"source_env": "PROD", "target_env": "dmz", "weight": 3},
+  {"source_env": "prod", "target_env": "edge", "weight": 4},
+  {"source_env": "dmz", "target_env": "edge", "weight": 6},
+  {"source_env": "dmz", "target_env": "vault", "weight": 7},
+  {"source_env": "edge", "target_env": "prod", "weight": 3},
+  {"source_env": "edge", "target_env": "vault", "weight": 2},
+  {"source_env": "vault", "target_env": "vault", "weight": 9},
+  {"source_env": "edge", "target_env": "ignored", "weight": 0}
+]

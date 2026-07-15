@@ -1,0 +1,62 @@
+[
+  {
+    "env": "dmz",
+    "severity_scope": "all",
+    "start_ms": 2010137006100,
+    "end_ms": 2010137006600
+  },
+  {
+    "env": "dmz",
+    "severity_scope": "all",
+    "start_ms": 2010137006500,
+    "end_ms": 2010137006750
+  },
+  {
+    "env": "dmz",
+    "severity_scope": "p1",
+    "start_ms": 2010137009000,
+    "end_ms": 2010137009400
+  },
+  {
+    "env": "dmz",
+    "severity_scope": "p1",
+    "start_ms": 2010137009700,
+    "end_ms": 2010137009780
+  },
+  {
+    "env": "prod",
+    "severity_scope": "p2",
+    "start_ms": 2010137004600,
+    "end_ms": 2010137004750
+  },
+  {
+    "env": "prod",
+    "severity_scope": "p2",
+    "start_ms": 2010137004750,
+    "end_ms": 2010137004800
+  },
+  {
+    "env": "edge",
+    "severity_scope": "all",
+    "start_ms": 2010137001180,
+    "end_ms": 2010137001280
+  },
+  {
+    "env": "edge",
+    "severity_scope": "p2",
+    "start_ms": 2010137002000,
+    "end_ms": 2010137002150
+  },
+  {
+    "env": "edge",
+    "severity_scope": "debug",
+    "start_ms": 137000000,
+    "end_ms": 137000001
+  },
+  {
+    "env": "prod",
+    "severity_scope": "all",
+    "start_ms": "oops",
+    "end_ms": "oops2"
+  }
+]

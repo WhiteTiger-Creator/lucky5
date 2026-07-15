@@ -1,0 +1,917 @@
+{
+  "broken_pipeline_sha256": "079adcd843066d9013926f4f042f24fd9ab1268e74d847e23a782ffaaf1fd13f",
+  "broken_summary_sha256": "49afb2c3e4d73c151baece34b480d5d55740072acc3d55645556457548a775f1",
+  "broken_queue_count": 5,
+  "broken_queue_ticket_ids": [
+    "c01",
+    "c10",
+    "c10",
+    "c12",
+    "c15"
+  ],
+  "alternate_input": "/tests/fixtures/alt_events.json",
+  "primary": {
+    "summary": {
+      "schema_version": "cert-rotation-v1",
+      "raw_alert_count": 22,
+      "unique_alert_ids": 17,
+      "canonical_alert_count": 17,
+      "env_count": 3,
+      "severity_counts": {
+        "p1": 5,
+        "p2": 7,
+        "p3": 3,
+        "p4": 2
+      },
+      "total_unmuted_duration_ms": 6050,
+      "total_freeze_overlap_ms": 2500,
+      "total_freeze_segment_count": 6,
+      "total_effective_duration_ms": 3550,
+      "total_reopen_overlap_ms": 1460,
+      "total_reopen_segment_count": 6,
+      "total_risk_adjusted_duration_ms": 2820,
+      "total_rotation_overlap_ms": 850,
+      "total_rotation_segment_count": 4,
+      "total_dispatchable_duration_ms": 2538,
+      "total_defer_overlap_ms": 830,
+      "total_defer_segment_count": 5,
+      "total_actionable_duration_ms": 2332,
+      "total_ledger_adjusted_actionable_ms": 2332,
+      "longest_window_ms": 1200,
+      "queued_window_count": 1,
+      "muted_excluded_count": 2,
+      "max_stability_pressure_score": 5,
+      "max_volatility_index": 7,
+      "max_defer_pressure_score": 1,
+      "max_ledger_pressure_score": 4,
+      "max_trust_exposure_score": 23,
+      "max_carry_out_ms": 500,
+      "max_stability_index": 23,
+      "canonical_alert_checksum": "010f5519c5a212634ad86b68d864d3ce1761756dcc8de55885536542c5b46338",
+      "queue_hash_checksum": "3f235cbfae644bdf75981790b514876fb620f23e2910700f1dc01c18cd8da69e",
+      "freeze_compaction_checksum": "e413e0df5b5ebf1883a68e0dec054e38858ca6e325ee3179b5e19c6f4b4ec0aa",
+      "reopen_compaction_checksum": "cadde4a4b5eea10feecc0208f31345101c92c44fbc2e0232a29f6136ca936db2",
+      "rotation_compaction_checksum": "1e5bae28bbed7fc11a2b0cdeea93b6e3d6701a24944f9dc3cdab2ca71f70f76b",
+      "defer_compaction_checksum": "9d16fa074fcfce82139fbd87f47f984f859f37c9f9046a714ea892eebad7b9a2",
+      "trust_edge_checksum": "ed7c2cae8f3ac224b0d8ac70f03afb20c2f275f3f1cd9b763bc4d07af20a63f9",
+      "window_digest_checksum": "fb63482362771724512893594d4427fb2eb12d8f699609c63ba642c8cc369077",
+      "ledger_checksum": "098a654d4b5e5671a1c8a8eef9fef0fd0360f5e6fd969616726903d84d862679",
+      "trust_path_digest_checksum": "7bf16b0aeb39a93e8e350adf51aa2c180c73d4b24ecbb59d284d936620ae53bc"
+    },
+    "windows": {
+      "dmz": [
+        {
+          "start_ms": 2010137003400,
+          "end_ms": 2010137003900,
+          "duration_ms": 500,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 500,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 500,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 500,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 500,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c05"
+          ],
+          "max_severity": "p3",
+          "idle_gap_ms": 0,
+          "carry_in_ms": 0,
+          "carry_out_ms": 500,
+          "ledger_adjusted_actionable_ms": 500,
+          "trust_reachable_envs": [
+            "edge",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 23,
+          "trust_strongest_path": [
+            "dmz",
+            "edge",
+            "prod"
+          ],
+          "trust_path_digest": "22d16a2b1e58"
+        },
+        {
+          "start_ms": 2010137005000,
+          "end_ms": 2010137005600,
+          "duration_ms": 600,
+          "freeze_overlap_ms": 600,
+          "freeze_segment_count": 1,
+          "effective_duration_ms": 0,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 0,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 0,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 0,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c07"
+          ],
+          "max_severity": "p1",
+          "idle_gap_ms": 1100,
+          "carry_in_ms": 0,
+          "carry_out_ms": 0,
+          "ledger_adjusted_actionable_ms": 0,
+          "trust_reachable_envs": [
+            "edge",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 23,
+          "trust_strongest_path": [
+            "dmz",
+            "edge",
+            "prod"
+          ],
+          "trust_path_digest": "22d16a2b1e58"
+        },
+        {
+          "start_ms": 2010137006200,
+          "end_ms": 2010137006800,
+          "duration_ms": 600,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 600,
+          "reopen_overlap_ms": 550,
+          "reopen_segment_count": 1,
+          "risk_adjusted_duration_ms": 325,
+          "rotation_overlap_ms": 250,
+          "rotation_segment_count": 1,
+          "dispatchable_duration_ms": 242,
+          "defer_overlap_ms": 310,
+          "defer_segment_count": 1,
+          "actionable_duration_ms": 165,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c09"
+          ],
+          "max_severity": "p2",
+          "idle_gap_ms": 600,
+          "carry_in_ms": 0,
+          "carry_out_ms": 190,
+          "ledger_adjusted_actionable_ms": 165,
+          "trust_reachable_envs": [
+            "edge",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 23,
+          "trust_strongest_path": [
+            "dmz",
+            "edge",
+            "prod"
+          ],
+          "trust_path_digest": "22d16a2b1e58"
+        },
+        {
+          "start_ms": 2010137008600,
+          "end_ms": 2010137009800,
+          "duration_ms": 1200,
+          "freeze_overlap_ms": 600,
+          "freeze_segment_count": 1,
+          "effective_duration_ms": 600,
+          "reopen_overlap_ms": 480,
+          "reopen_segment_count": 2,
+          "risk_adjusted_duration_ms": 360,
+          "rotation_overlap_ms": 210,
+          "rotation_segment_count": 1,
+          "dispatchable_duration_ms": 290,
+          "defer_overlap_ms": 170,
+          "defer_segment_count": 1,
+          "actionable_duration_ms": 248,
+          "alert_count": 2,
+          "source_alert_ids": [
+            "c13",
+            "c15"
+          ],
+          "max_severity": "p1",
+          "idle_gap_ms": 1800,
+          "carry_in_ms": 0,
+          "carry_out_ms": 273,
+          "ledger_adjusted_actionable_ms": 248,
+          "trust_reachable_envs": [
+            "edge",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 23,
+          "trust_strongest_path": [
+            "dmz",
+            "edge",
+            "prod"
+          ],
+          "trust_path_digest": "22d16a2b1e58"
+        }
+      ],
+      "edge": [
+        {
+          "start_ms": 2010137001200,
+          "end_ms": 2010137002200,
+          "duration_ms": 1000,
+          "freeze_overlap_ms": 700,
+          "freeze_segment_count": 1,
+          "effective_duration_ms": 300,
+          "reopen_overlap_ms": 230,
+          "reopen_segment_count": 2,
+          "risk_adjusted_duration_ms": 185,
+          "rotation_overlap_ms": 110,
+          "rotation_segment_count": 1,
+          "dispatchable_duration_ms": 149,
+          "defer_overlap_ms": 80,
+          "defer_segment_count": 2,
+          "actionable_duration_ms": 129,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c02"
+          ],
+          "max_severity": "p2",
+          "idle_gap_ms": 0,
+          "carry_in_ms": 0,
+          "carry_out_ms": 164,
+          "ledger_adjusted_actionable_ms": 129,
+          "trust_reachable_envs": [
+            "dmz",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 26,
+          "trust_strongest_path": [
+            "edge",
+            "prod",
+            "dmz",
+            "vault"
+          ],
+          "trust_path_digest": "aaa3a2d4cbff"
+        },
+        {
+          "start_ms": 2010137003000,
+          "end_ms": 2010137003300,
+          "duration_ms": 300,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 300,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 300,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 300,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 300,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c04"
+          ],
+          "max_severity": "p3",
+          "idle_gap_ms": 800,
+          "carry_in_ms": 0,
+          "carry_out_ms": 300,
+          "ledger_adjusted_actionable_ms": 300,
+          "trust_reachable_envs": [
+            "dmz",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 26,
+          "trust_strongest_path": [
+            "edge",
+            "prod",
+            "dmz",
+            "vault"
+          ],
+          "trust_path_digest": "aaa3a2d4cbff"
+        },
+        {
+          "start_ms": 2010137005400,
+          "end_ms": 2010137005800,
+          "duration_ms": 400,
+          "freeze_overlap_ms": 250,
+          "freeze_segment_count": 1,
+          "effective_duration_ms": 150,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 150,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 150,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 150,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c08"
+          ],
+          "max_severity": "p2",
+          "idle_gap_ms": 2100,
+          "carry_in_ms": 0,
+          "carry_out_ms": 150,
+          "ledger_adjusted_actionable_ms": 150,
+          "trust_reachable_envs": [
+            "dmz",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 26,
+          "trust_strongest_path": [
+            "edge",
+            "prod",
+            "dmz",
+            "vault"
+          ],
+          "trust_path_digest": "aaa3a2d4cbff"
+        },
+        {
+          "start_ms": 2010137008800,
+          "end_ms": 2010137009000,
+          "duration_ms": 200,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 200,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 200,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 200,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 200,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c14"
+          ],
+          "max_severity": "p3",
+          "idle_gap_ms": 3000,
+          "carry_in_ms": 0,
+          "carry_out_ms": 200,
+          "ledger_adjusted_actionable_ms": 200,
+          "trust_reachable_envs": [
+            "dmz",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 26,
+          "trust_strongest_path": [
+            "edge",
+            "prod",
+            "dmz",
+            "vault"
+          ],
+          "trust_path_digest": "aaa3a2d4cbff"
+        }
+      ],
+      "prod": [
+        {
+          "start_ms": 2010137001000,
+          "end_ms": 2010137001300,
+          "duration_ms": 300,
+          "freeze_overlap_ms": 150,
+          "freeze_segment_count": 1,
+          "effective_duration_ms": 150,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 150,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 150,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 150,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c01"
+          ],
+          "max_severity": "p1",
+          "idle_gap_ms": 0,
+          "carry_in_ms": 0,
+          "carry_out_ms": 150,
+          "ledger_adjusted_actionable_ms": 150,
+          "trust_reachable_envs": [
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_exposure_score": 29,
+          "trust_strongest_path": [
+            "prod",
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_path_digest": "05910932ba95"
+        },
+        {
+          "start_ms": 2010137002400,
+          "end_ms": 2010137002600,
+          "duration_ms": 200,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 200,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 200,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 200,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 200,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c03"
+          ],
+          "max_severity": "p4",
+          "idle_gap_ms": 1100,
+          "carry_in_ms": 0,
+          "carry_out_ms": 200,
+          "ledger_adjusted_actionable_ms": 200,
+          "trust_reachable_envs": [
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_exposure_score": 29,
+          "trust_strongest_path": [
+            "prod",
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_path_digest": "05910932ba95"
+        },
+        {
+          "start_ms": 2010137004500,
+          "end_ms": 2010137004900,
+          "duration_ms": 400,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 400,
+          "reopen_overlap_ms": 200,
+          "reopen_segment_count": 1,
+          "risk_adjusted_duration_ms": 300,
+          "rotation_overlap_ms": 280,
+          "rotation_segment_count": 1,
+          "dispatchable_duration_ms": 207,
+          "defer_overlap_ms": 270,
+          "defer_segment_count": 1,
+          "actionable_duration_ms": 140,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c06"
+          ],
+          "max_severity": "p2",
+          "idle_gap_ms": 1900,
+          "carry_in_ms": 0,
+          "carry_out_ms": 165,
+          "ledger_adjusted_actionable_ms": 140,
+          "trust_reachable_envs": [
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_exposure_score": 29,
+          "trust_strongest_path": [
+            "prod",
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_path_digest": "05910932ba95"
+        },
+        {
+          "start_ms": 2010137006800,
+          "end_ms": 2010137007000,
+          "duration_ms": 200,
+          "freeze_overlap_ms": 200,
+          "freeze_segment_count": 1,
+          "effective_duration_ms": 0,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 0,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 0,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 0,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c10"
+          ],
+          "max_severity": "p1",
+          "idle_gap_ms": 1900,
+          "carry_in_ms": 0,
+          "carry_out_ms": 0,
+          "ledger_adjusted_actionable_ms": 0,
+          "trust_reachable_envs": [
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_exposure_score": 29,
+          "trust_strongest_path": [
+            "prod",
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_path_digest": "05910932ba95"
+        },
+        {
+          "start_ms": 2010137007300,
+          "end_ms": 2010137007350,
+          "duration_ms": 50,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 50,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 50,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 50,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 50,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c11"
+          ],
+          "max_severity": "p4",
+          "idle_gap_ms": 300,
+          "carry_in_ms": 0,
+          "carry_out_ms": 50,
+          "ledger_adjusted_actionable_ms": 50,
+          "trust_reachable_envs": [
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_exposure_score": 29,
+          "trust_strongest_path": [
+            "prod",
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_path_digest": "05910932ba95"
+        },
+        {
+          "start_ms": 2010137009200,
+          "end_ms": 2010137009300,
+          "duration_ms": 100,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 100,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 100,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 100,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 100,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "c17"
+          ],
+          "max_severity": "p2",
+          "idle_gap_ms": 1850,
+          "carry_in_ms": 0,
+          "carry_out_ms": 100,
+          "ledger_adjusted_actionable_ms": 100,
+          "trust_reachable_envs": [
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_exposure_score": 29,
+          "trust_strongest_path": [
+            "prod",
+            "dmz",
+            "edge",
+            "vault"
+          ],
+          "trust_path_digest": "05910932ba95"
+        }
+      ]
+    },
+    "queue_rows": [
+      {
+        "ticket_id": "dmz:2010137008600-2010137009800",
+        "env": "dmz",
+        "start_ms": 2010137008600,
+        "end_ms": 2010137009800,
+        "duration_ms": 1200,
+        "freeze_overlap_ms": 600,
+        "freeze_segment_count": 1,
+        "effective_duration_ms": 600,
+        "reopen_overlap_ms": 480,
+        "reopen_segment_count": 2,
+        "risk_adjusted_duration_ms": 360,
+        "rotation_overlap_ms": 210,
+        "rotation_segment_count": 1,
+        "dispatchable_duration_ms": 290,
+        "defer_overlap_ms": 170,
+        "defer_segment_count": 1,
+        "actionable_duration_ms": 248,
+        "idle_gap_ms": 1800,
+        "carry_in_ms": 0,
+        "carry_out_ms": 273,
+        "ledger_adjusted_actionable_ms": 248,
+        "trust_reachable_envs": [
+          "edge",
+          "prod",
+          "vault"
+        ],
+        "trust_exposure_score": 23,
+        "trust_strongest_path": [
+          "dmz",
+          "edge",
+          "prod"
+        ],
+        "trust_path_digest": "22d16a2b1e58",
+        "alert_count": 2,
+        "source_alert_ids": [
+          "c13",
+          "c15"
+        ],
+        "max_severity": "p1",
+        "stability_pressure_score": 5,
+        "volatility_index": 7,
+        "defer_pressure_score": 1,
+        "ledger_pressure_score": 4,
+        "stability_index": 23,
+        "priority": "critical",
+        "queue_hash": "d5323b91d620",
+        "window_digest": "79ee91e64c"
+      }
+    ]
+  },
+  "alternate": {
+    "summary": {
+      "schema_version": "cert-rotation-v1",
+      "raw_alert_count": 5,
+      "unique_alert_ids": 4,
+      "canonical_alert_count": 4,
+      "env_count": 2,
+      "severity_counts": {
+        "p1": 1,
+        "p2": 2,
+        "p3": 1,
+        "p4": 0
+      },
+      "total_unmuted_duration_ms": 750,
+      "total_freeze_overlap_ms": 0,
+      "total_freeze_segment_count": 0,
+      "total_effective_duration_ms": 750,
+      "total_reopen_overlap_ms": 0,
+      "total_reopen_segment_count": 0,
+      "total_risk_adjusted_duration_ms": 750,
+      "total_rotation_overlap_ms": 0,
+      "total_rotation_segment_count": 0,
+      "total_dispatchable_duration_ms": 750,
+      "total_defer_overlap_ms": 0,
+      "total_defer_segment_count": 0,
+      "total_actionable_duration_ms": 750,
+      "total_ledger_adjusted_actionable_ms": 836,
+      "longest_window_ms": 370,
+      "queued_window_count": 2,
+      "muted_excluded_count": 0,
+      "max_stability_pressure_score": 1,
+      "max_volatility_index": 1,
+      "max_defer_pressure_score": 0,
+      "max_ledger_pressure_score": 5,
+      "max_trust_exposure_score": 26,
+      "max_carry_out_ms": 415,
+      "max_stability_index": 16,
+      "canonical_alert_checksum": "9a9be3b88cb479d8b716ea2b22359baa115b279000ab850407f20ed1caf40484",
+      "queue_hash_checksum": "72cf00760ff5f27b3ac306e415e718996aa143a4303a705bbc42ff651f2a4671",
+      "freeze_compaction_checksum": "e413e0df5b5ebf1883a68e0dec054e38858ca6e325ee3179b5e19c6f4b4ec0aa",
+      "reopen_compaction_checksum": "cadde4a4b5eea10feecc0208f31345101c92c44fbc2e0232a29f6136ca936db2",
+      "rotation_compaction_checksum": "1e5bae28bbed7fc11a2b0cdeea93b6e3d6701a24944f9dc3cdab2ca71f70f76b",
+      "defer_compaction_checksum": "9d16fa074fcfce82139fbd87f47f984f859f37c9f9046a714ea892eebad7b9a2",
+      "trust_edge_checksum": "ed7c2cae8f3ac224b0d8ac70f03afb20c2f275f3f1cd9b763bc4d07af20a63f9",
+      "window_digest_checksum": "5f8caed566aad2fd0004da7fe50158c40857c66fa68a685adee0a2b36a35d242",
+      "ledger_checksum": "03650c688c10aa5a21d7a5cc2408a4f9f20e5e20f0c8bd07caeeaf95d0d7dd74",
+      "trust_path_digest_checksum": "98aa77d993025b70542682cb65144ea0712bdba0f7d5056c36efbd046ff70ae3"
+    },
+    "windows": {
+      "edge": [
+        {
+          "start_ms": 600,
+          "end_ms": 910,
+          "duration_ms": 310,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 310,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 310,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 310,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 310,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "a4"
+          ],
+          "max_severity": "p2",
+          "idle_gap_ms": 0,
+          "carry_in_ms": 0,
+          "carry_out_ms": 310,
+          "ledger_adjusted_actionable_ms": 310,
+          "trust_reachable_envs": [
+            "dmz",
+            "prod",
+            "vault"
+          ],
+          "trust_exposure_score": 26,
+          "trust_strongest_path": [
+            "edge",
+            "prod",
+            "dmz",
+            "vault"
+          ],
+          "trust_path_digest": "aaa3a2d4cbff"
+        }
+      ],
+      "lab": [
+        {
+          "start_ms": 100,
+          "end_ms": 470,
+          "duration_ms": 370,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 370,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 370,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 370,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 370,
+          "alert_count": 2,
+          "source_alert_ids": [
+            "a1",
+            "a2"
+          ],
+          "max_severity": "p1",
+          "idle_gap_ms": 0,
+          "carry_in_ms": 0,
+          "carry_out_ms": 370,
+          "ledger_adjusted_actionable_ms": 370,
+          "trust_reachable_envs": [],
+          "trust_exposure_score": 0,
+          "trust_strongest_path": [
+            "lab"
+          ],
+          "trust_path_digest": "9a7ed74c5192"
+        },
+        {
+          "start_ms": 520,
+          "end_ms": 590,
+          "duration_ms": 70,
+          "freeze_overlap_ms": 0,
+          "freeze_segment_count": 0,
+          "effective_duration_ms": 70,
+          "reopen_overlap_ms": 0,
+          "reopen_segment_count": 0,
+          "risk_adjusted_duration_ms": 70,
+          "rotation_overlap_ms": 0,
+          "rotation_segment_count": 0,
+          "dispatchable_duration_ms": 70,
+          "defer_overlap_ms": 0,
+          "defer_segment_count": 0,
+          "actionable_duration_ms": 70,
+          "alert_count": 1,
+          "source_alert_ids": [
+            "a3"
+          ],
+          "max_severity": "p3",
+          "idle_gap_ms": 50,
+          "carry_in_ms": 345,
+          "carry_out_ms": 415,
+          "ledger_adjusted_actionable_ms": 156,
+          "trust_reachable_envs": [],
+          "trust_exposure_score": 0,
+          "trust_strongest_path": [
+            "lab"
+          ],
+          "trust_path_digest": "9a7ed74c5192"
+        }
+      ]
+    },
+    "queue_rows": [
+      {
+        "ticket_id": "lab:100-470",
+        "env": "lab",
+        "start_ms": 100,
+        "end_ms": 470,
+        "duration_ms": 370,
+        "freeze_overlap_ms": 0,
+        "freeze_segment_count": 0,
+        "effective_duration_ms": 370,
+        "reopen_overlap_ms": 0,
+        "reopen_segment_count": 0,
+        "risk_adjusted_duration_ms": 370,
+        "rotation_overlap_ms": 0,
+        "rotation_segment_count": 0,
+        "dispatchable_duration_ms": 370,
+        "defer_overlap_ms": 0,
+        "defer_segment_count": 0,
+        "actionable_duration_ms": 370,
+        "idle_gap_ms": 0,
+        "carry_in_ms": 0,
+        "carry_out_ms": 370,
+        "ledger_adjusted_actionable_ms": 370,
+        "trust_reachable_envs": [],
+        "trust_exposure_score": 0,
+        "trust_strongest_path": [
+          "lab"
+        ],
+        "trust_path_digest": "9a7ed74c5192",
+        "alert_count": 2,
+        "source_alert_ids": [
+          "a1",
+          "a2"
+        ],
+        "max_severity": "p1",
+        "stability_pressure_score": 1,
+        "volatility_index": 1,
+        "defer_pressure_score": 0,
+        "ledger_pressure_score": 5,
+        "stability_index": 6,
+        "priority": "critical",
+        "queue_hash": "4e650383d928",
+        "window_digest": "cade568b7d"
+      },
+      {
+        "ticket_id": "edge:600-910",
+        "env": "edge",
+        "start_ms": 600,
+        "end_ms": 910,
+        "duration_ms": 310,
+        "freeze_overlap_ms": 0,
+        "freeze_segment_count": 0,
+        "effective_duration_ms": 310,
+        "reopen_overlap_ms": 0,
+        "reopen_segment_count": 0,
+        "risk_adjusted_duration_ms": 310,
+        "rotation_overlap_ms": 0,
+        "rotation_segment_count": 0,
+        "dispatchable_duration_ms": 310,
+        "defer_overlap_ms": 0,
+        "defer_segment_count": 0,
+        "actionable_duration_ms": 310,
+        "idle_gap_ms": 0,
+        "carry_in_ms": 0,
+        "carry_out_ms": 310,
+        "ledger_adjusted_actionable_ms": 310,
+        "trust_reachable_envs": [
+          "dmz",
+          "prod",
+          "vault"
+        ],
+        "trust_exposure_score": 26,
+        "trust_strongest_path": [
+          "edge",
+          "prod",
+          "dmz",
+          "vault"
+        ],
+        "trust_path_digest": "aaa3a2d4cbff",
+        "alert_count": 1,
+        "source_alert_ids": [
+          "a4"
+        ],
+        "max_severity": "p2",
+        "stability_pressure_score": 0,
+        "volatility_index": 0,
+        "defer_pressure_score": 0,
+        "ledger_pressure_score": 3,
+        "stability_index": 16,
+        "priority": "critical",
+        "queue_hash": "b41317709d9b",
+        "window_digest": "74a591ca01"
+      }
+    ]
+  }
+}

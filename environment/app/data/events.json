@@ -1,0 +1,200 @@
+[
+  {
+    "alert_id": "c01",
+    "start_ms": 2010137001000,
+    "end_ms": 2010137001300,
+    "severity": "p1",
+    "env": "prod",
+    "signature": "leaf cert expiry within threshold",
+    "muted": false
+  },
+  {
+    "alert_id": "c02",
+    "start_ms": 2010137001200,
+    "end_ms": 2010137001800,
+    "severity": "p3",
+    "env": "edge",
+    "signature": "chain missing intermediate",
+    "muted": false
+  },
+  {
+    "alert_id": "c02",
+    "start_ms": 2010137001200,
+    "end_ms": 2010137002200,
+    "severity": "P2",
+    "env": "edge",
+    "signature": " chain missing intermediate replay ",
+    "muted": false
+  },
+  {
+    "alert_id": "c03",
+    "start_ms": 2010137002400,
+    "end_ms": 2010137002600,
+    "severity": "p4",
+    "env": "prod",
+    "signature": "ocsp staple recovered",
+    "muted": false
+  },
+  {
+    "alert_id": "c04",
+    "start_ms": 2010137003000,
+    "end_ms": 2010137003300,
+    "severity": "p3",
+    "env": "edge",
+    "signature": "renewal agent late checkin",
+    "muted": false
+  },
+  {
+    "alert_id": "c05",
+    "start_ms": 2010137003400,
+    "end_ms": 2010137003900,
+    "severity": "p3",
+    "env": "dmz",
+    "signature": "manual analyst note",
+    "muted": false
+  },
+  {
+    "alert_id": "c06",
+    "start_ms": 2010137004500,
+    "end_ms": 2010137004900,
+    "severity": "p2",
+    "env": "prod",
+    "signature": "san mismatch on rotation",
+    "muted": false
+  },
+  {
+    "alert_id": "c07",
+    "start_ms": 2010137005000,
+    "end_ms": 2010137005600,
+    "severity": "P1",
+    "env": "dmz",
+    "signature": "gateway cert rollback",
+    "muted": false
+  },
+  {
+    "alert_id": "c08",
+    "start_ms": 2010137005400,
+    "end_ms": 2010137005800,
+    "severity": "P2",
+    "env": "edge",
+    "signature": "temporary rotation drift burst",
+    "muted": false
+  },
+  {
+    "alert_id": "c08",
+    "start_ms": 2010137005400,
+    "end_ms": 2010137005600,
+    "severity": "p3",
+    "env": "edge",
+    "signature": "recovered after re-issue",
+    "muted": false
+  },
+  {
+    "alert_id": "c09",
+    "start_ms": 2010137006200,
+    "end_ms": 2010137006800,
+    "severity": "p2",
+    "env": "dmz",
+    "signature": "duplicate csr replay",
+    "muted": false
+  },
+  {
+    "alert_id": "c10",
+    "start_ms": 2010137006800,
+    "end_ms": 2010137006900,
+    "severity": "p1",
+    "env": "prod",
+    "signature": "stale trust anchor map",
+    "muted": false
+  },
+  {
+    "alert_id": "c10",
+    "start_ms": 2010137006800,
+    "end_ms": 2010137007000,
+    "severity": "p1",
+    "env": "prod",
+    "signature": "stale trust anchor map replay",
+    "muted": false
+  },
+  {
+    "alert_id": "c11",
+    "start_ms": 2010137007300,
+    "end_ms": 2010137007350,
+    "severity": "p4",
+    "env": "prod",
+    "signature": "diagnostic trace",
+    "muted": false
+  },
+  {
+    "alert_id": "c12",
+    "start_ms": 2010137007800,
+    "end_ms": 2010137008400,
+    "severity": "p1",
+    "env": "edge",
+    "signature": "waived rehearsal alert",
+    "muted": true
+  },
+  {
+    "alert_id": "c13",
+    "start_ms": 2010137008600,
+    "end_ms": 2010137009200,
+    "severity": "p2",
+    "env": "dmz",
+    "signature": "weak key length ratio",
+    "muted": false
+  },
+  {
+    "alert_id": "c14",
+    "start_ms": 2010137008800,
+    "end_ms": 2010137009000,
+    "severity": "p3",
+    "env": "edge",
+    "signature": "batch reissue complete",
+    "muted": false
+  },
+  {
+    "alert_id": "c15",
+    "start_ms": 2010137009000,
+    "end_ms": 2010137009800,
+    "severity": "p1",
+    "env": "dmz",
+    "signature": "terminal rotation rollback",
+    "muted": false
+  },
+  {
+    "alert_id": "c16",
+    "start_ms": 2010137009100,
+    "end_ms": 2010137009500,
+    "severity": "p2",
+    "env": "dmz",
+    "signature": "zzz candidate",
+    "muted": "yes"
+  },
+  {
+    "alert_id": "c16",
+    "start_ms": 2010137009100,
+    "end_ms": 2010137009500,
+    "severity": "p2",
+    "env": "dmz",
+    "signature": "aaa candidate",
+    "muted": false
+  },
+  {
+    "alert_id": "c17",
+    "start_ms": 2010137009200,
+    "end_ms": 2010137009300,
+    "severity": "p2",
+    "env": "prod",
+    "signature": "alpha signature",
+    "muted": false
+  },
+  {
+    "alert_id": "c17",
+    "start_ms": 2010137009200,
+    "end_ms": 2010137009300,
+    "severity": "p2",
+    "env": "prod",
+    "signature": "zeta signature",
+    "muted": false
+  }
+]
