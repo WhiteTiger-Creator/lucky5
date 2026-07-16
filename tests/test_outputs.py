@@ -48,6 +48,7 @@ def _write_json(path: Path, value: object) -> None:
 
 
 def test_checksum_serialization_contract_vectors():
+    """The checksum serialization rules reproduce the contract's worked test vectors byte for byte."""
     vectors = SPEC["summary_json"]["checksum_test_vectors"]
     for prefix in ("canonical_alert", "freeze", "scoped", "ledger", "trust_edge"):
         payload = vectors[f"{prefix}_payload"].encode("utf-8")
@@ -77,31 +78,37 @@ def primary_outputs(tmp_path_factory):
 
 
 def test_cli_exists():
+    """The reconciler exists at its operational path and runs successfully."""
     assert WORKFLOW_PATH.exists()
 
 
 def test_output_dir_contains_exactly_three_files(primary_outputs):
+    """A run writes exactly the three contracted output files and nothing else."""
     out_dir, _, _, _ = primary_outputs
     names = sorted(path.name for path in out_dir.iterdir() if path.is_file())
     assert names == ["drift_windows.json", "response_queue.jsonl", "summary.json"]
 
 
 def test_primary_summary_matches_fixture(primary_outputs):
+    """summary.json from the primary event stream matches the expected fixture exactly."""
     _, summary, _, _ = primary_outputs
     assert summary == FIXTURE["primary"]["summary"]
 
 
 def test_primary_windows_matches_fixture(primary_outputs):
+    """drift_windows.json from the primary event stream matches the expected fixture exactly."""
     _, _, windows, _ = primary_outputs
     assert windows == FIXTURE["primary"]["windows"]
 
 
 def test_primary_queue_matches_fixture(primary_outputs):
+    """response_queue.jsonl from the primary event stream matches the expected fixture exactly."""
     _, _, _, queue = primary_outputs
     assert queue == FIXTURE["primary"]["queue_rows"]
 
 
 def test_summary_schema(primary_outputs):
+    """summary.json carries exactly the contracted key set with correctly typed values."""
     _, summary, _, _ = primary_outputs
     assert set(summary) == {
         "schema_version",
@@ -160,6 +167,7 @@ def test_summary_schema(primary_outputs):
 
 
 def test_windows_schema_and_sorting(primary_outputs):
+    """drift_windows.json rows carry the contracted keys and are sorted as the contract specifies."""
     _, _, windows, _ = primary_outputs
     expected_keys = {
         "start_ms",
@@ -217,6 +225,7 @@ def test_windows_schema_and_sorting(primary_outputs):
 
 
 def test_queue_required_fields(primary_outputs):
+    """Every queue row carries the required fields with contract-conformant shapes."""
     _, _, _, queue = primary_outputs
     expected_keys = {
         "ticket_id",
@@ -264,6 +273,7 @@ def test_queue_required_fields(primary_outputs):
 
 
 def test_priority_rules(primary_outputs):
+    """Queue rows receive priority tiers according to the decided admission thresholds."""
     _, _, _, queue = primary_outputs
     for row in queue:
         if (
@@ -292,6 +302,7 @@ def test_priority_rules(primary_outputs):
 
 
 def test_queue_sorted(primary_outputs):
+    """The responder queue is emitted in the fully specified tie-broken order."""
     _, _, _, queue = primary_outputs
     assert queue == sorted(
         queue,
@@ -314,6 +325,7 @@ def test_queue_sorted(primary_outputs):
 
 
 def test_response_queue_jsonl_compact(primary_outputs):
+    """response_queue.jsonl rows are serialized as compact JSON with no padding whitespace."""
     out_dir, _, _, _ = primary_outputs
     for line in (out_dir / "response_queue.jsonl").read_text(encoding="utf-8").splitlines():
         if not line.strip():
@@ -324,6 +336,7 @@ def test_response_queue_jsonl_compact(primary_outputs):
 
 
 def test_summary_math_consistency(primary_outputs):
+    """Aggregate summary fields are internally consistent with the emitted windows and queue."""
     _, summary, windows, _ = primary_outputs
     duration_total = 0
     overlap_total = 0
@@ -375,12 +388,14 @@ def test_summary_math_consistency(primary_outputs):
 
 
 def test_original_snapshot_preserved():
+    """The frozen incident snapshot remains byte-identical to the shipped original."""
     assert ORIGINAL_WORKFLOW_PATH.exists()
     digest = hashlib.sha256(ORIGINAL_WORKFLOW_PATH.read_bytes()).hexdigest()
     assert digest == FIXTURE["broken_pipeline_sha256"]
 
 
 def test_broken_snapshot_is_wrong(tmp_path: Path):
+    """The frozen snapshot still produces the known-bad output, proving the pipeline was genuinely repaired."""
     _, broken_summary, _, broken_queue = _run_pipeline(tmp_path, script_path=ORIGINAL_WORKFLOW_PATH)
     broken_summary_hash = hashlib.sha256(
         json.dumps(broken_summary, sort_keys=True).encode("utf-8")
@@ -392,6 +407,7 @@ def test_broken_snapshot_is_wrong(tmp_path: Path):
 
 
 def test_pipeline_rerun_idempotent(tmp_path: Path):
+    """Two identical runs produce identical outputs."""
     _, summary_a, windows_a, queue_a = _run_pipeline(tmp_path / "a")
     _, summary_b, windows_b, queue_b = _run_pipeline(tmp_path / "b")
     assert summary_a == summary_b
@@ -400,6 +416,7 @@ def test_pipeline_rerun_idempotent(tmp_path: Path):
 
 
 def test_pipeline_supports_alternate_input(tmp_path: Path):
+    """The reconciler generalizes to an alternate event stream it has never seen."""
     _, summary, windows, queue = _run_pipeline(tmp_path, input_path=ALT_INPUT)
     assert summary == FIXTURE["alternate"]["summary"]
     assert windows == FIXTURE["alternate"]["windows"]
@@ -407,6 +424,7 @@ def test_pipeline_supports_alternate_input(tmp_path: Path):
 
 
 def test_pipeline_supports_custom_output_dir(tmp_path: Path):
+    """--output-dir redirects all three artifacts to the requested directory."""
     custom = tmp_path / "custom-output"
     subprocess.run(
         [sys.executable, str(WORKFLOW_PATH), "--input", str(DEFAULT_INPUT), "--output-dir", str(custom)],
@@ -420,6 +438,7 @@ def test_pipeline_supports_custom_output_dir(tmp_path: Path):
 
 
 def test_cli_defaults_work_and_match_explicit_run(tmp_path: Path):
+    """Default CLI arguments resolve to the documented paths and match an explicit invocation."""
     explicit_out = tmp_path / "explicit"
     explicit_out.mkdir(parents=True, exist_ok=True)
     subprocess.run(
@@ -436,6 +455,7 @@ def test_cli_defaults_work_and_match_explicit_run(tmp_path: Path):
 
 
 def test_freeze_source_path_affects_output(tmp_path: Path):
+    """Freeze windows are read from their fixed absolute path and influence the output."""
     original = FREEZE_PATH.read_text(encoding="utf-8")
     try:
         _, summary_a, _, _ = _run_pipeline(tmp_path / "a")
@@ -452,6 +472,7 @@ def test_freeze_source_path_affects_output(tmp_path: Path):
 
 
 def test_reopen_source_path_affects_output(tmp_path: Path):
+    """Reopen windows are read from their fixed absolute path and influence the output."""
     original = REOPEN_PATH.read_text(encoding="utf-8")
     try:
         _, summary_a, _, queue_a = _run_pipeline(tmp_path / "a")
@@ -467,6 +488,7 @@ def test_reopen_source_path_affects_output(tmp_path: Path):
 
 
 def test_rotation_source_path_affects_output(tmp_path: Path):
+    """Rotation windows are read from their fixed absolute path and influence the output."""
     original = ROTATION_PATH.read_text(encoding="utf-8")
     try:
         _, summary_a, _, queue_a = _run_pipeline(tmp_path / "a")
@@ -485,6 +507,7 @@ def test_rotation_source_path_affects_output(tmp_path: Path):
 
 
 def test_defer_source_path_affects_output(tmp_path: Path):
+    """Defer windows are read from their fixed absolute path and influence the output."""
     original = DEFER_PATH.read_text(encoding="utf-8")
     try:
         _, summary_a, _, queue_a = _run_pipeline(tmp_path / "a")
@@ -503,6 +526,7 @@ def test_defer_source_path_affects_output(tmp_path: Path):
 
 
 def test_trust_edge_source_path_affects_output(tmp_path: Path):
+    """The trust edge graph is read from its fixed absolute path and influences exposure scoring."""
     original = TRUST_EDGES_PATH.read_text(encoding="utf-8")
     try:
         _, summary_a, windows_a, queue_a = _run_pipeline(tmp_path / "a")
@@ -519,6 +543,7 @@ def test_trust_edge_source_path_affects_output(tmp_path: Path):
 
 
 def test_trust_exposure_uses_strongest_bounded_simple_paths(tmp_path: Path):
+    """Trust exposure scores come from the strongest bounded simple directed paths through the edge graph."""
     original = TRUST_EDGES_PATH.read_text(encoding="utf-8")
     try:
         edges = [
@@ -582,6 +607,7 @@ def test_trust_exposure_uses_strongest_bounded_simple_paths(tmp_path: Path):
 
 
 def test_compacted_freeze_segments_are_used(tmp_path: Path):
+    """Overlapping freeze entries are compacted into segments before overlap is measured."""
     original = FREEZE_PATH.read_text(encoding="utf-8")
     try:
         custom_freezes = [
@@ -614,6 +640,7 @@ def test_compacted_freeze_segments_are_used(tmp_path: Path):
 
 
 def test_reopen_compaction_and_scope_are_used(tmp_path: Path):
+    """Reopen windows are compacted and applied only within their decided scope."""
     original_reopen = REOPEN_PATH.read_text(encoding="utf-8")
     try:
         reopen_rows = [
@@ -663,6 +690,7 @@ def test_reopen_compaction_and_scope_are_used(tmp_path: Path):
 
 
 def test_rotation_compaction_and_scope_are_used(tmp_path: Path):
+    """Rotation windows are compacted and applied only within their decided scope."""
     original_rotation = ROTATION_PATH.read_text(encoding="utf-8")
     try:
         rotation_rows = [
@@ -714,6 +742,7 @@ def test_rotation_compaction_and_scope_are_used(tmp_path: Path):
 
 
 def test_defer_compaction_and_scope_are_used(tmp_path: Path):
+    """Defer windows are compacted and applied only within their decided scope."""
     original_defer = DEFER_PATH.read_text(encoding="utf-8")
     try:
         defer_rows = [
@@ -765,6 +794,7 @@ def test_defer_compaction_and_scope_are_used(tmp_path: Path):
 
 
 def test_p2_windows_borrow_p1_scope_when_p2_scope_missing(tmp_path: Path):
+    """P2 windows inherit the p1 scope allowlist when no p2-specific scope is defined."""
     originals = {
         REOPEN_PATH: REOPEN_PATH.read_text(encoding="utf-8"),
         ROTATION_PATH: ROTATION_PATH.read_text(encoding="utf-8"),
@@ -835,6 +865,7 @@ def test_p2_windows_borrow_p1_scope_when_p2_scope_missing(tmp_path: Path):
 
 
 def test_tie_break_full_tie_keeps_first_seen(tmp_path: Path):
+    """A full tie across every dedupe key keeps the first-seen record."""
     rows = [
         {
             "alert_id": "t1",
@@ -864,6 +895,7 @@ def test_tie_break_full_tie_keeps_first_seen(tmp_path: Path):
 
 
 def test_muted_truthiness_non_string_non_bool(tmp_path: Path):
+    """Muted flags holding non-string, non-boolean values are coerced by the decided truthiness rules."""
     rows = [
         {
             "alert_id": "m1",
@@ -892,6 +924,7 @@ def test_muted_truthiness_non_string_non_bool(tmp_path: Path):
 
 
 def test_stateful_risk_ledger_propagates_and_decays_between_windows(tmp_path: Path):
+    """The risk ledger carries state between a service's windows with idle-gap decay and the carry-out cap."""
     originals = {
         FREEZE_PATH: FREEZE_PATH.read_text(encoding="utf-8"),
         REOPEN_PATH: REOPEN_PATH.read_text(encoding="utf-8"),
@@ -944,6 +977,7 @@ def test_stateful_risk_ledger_propagates_and_decays_between_windows(tmp_path: Pa
 
 
 def test_pipeline_does_not_reference_test_artifacts():
+    """The reconciler source never references the verifier's /tests or /solution trees."""
     code = WORKFLOW_PATH.read_text(encoding="utf-8")
     for token in ("/tests", "fixtures/alt_events.json", "expected_summary.json"):
         assert token not in code
