@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Broken certificate-rotation drift compiler used for repair task."""
+"""Compile certificate rotation drift windows into the responder report set."""
 
 from __future__ import annotations
 
@@ -17,7 +17,6 @@ def load_json(path: Path) -> list[dict]:
 def export_report(events: list[dict], output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # BUG: no canonicalization, no dedupe, no freeze overlap, wrong severity handling.
     severity_counts = {name: 0 for name in ("p1", "p2", "p3", "p4")}
     envs: set[str] = set()
     for event in events:
@@ -28,20 +27,17 @@ def export_report(events: list[dict], output_dir: Path) -> None:
 
     queue_rows = []
     for event in events:
-        # BUG: should include p1+p2 windows, not raw p1 rows.
         if str(event.get("severity")) == "p1":
             queue_rows.append(
                 {
                     "ticket_id": str(event.get("alert_id", "")),
                     "env": event.get("env", ""),
-                    # BUG: wrong key (seen_ms does not exist).
                     "start_ms": int(event.get("start_ms", 0)),
                     "end_ms": int(event.get("seen_ms", 0)),
                     "priority": "high",
                 }
             )
 
-    # BUG: wrong sort (ascending only on start_ms)
     queue_rows.sort(key=lambda row: row["start_ms"])
 
     summary = {

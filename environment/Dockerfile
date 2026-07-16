@@ -29,5 +29,5 @@ RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh \
     && printf 'svc-certd ALL=(ALL) NOPASSWD:ALL\n' > /etc/sudoers.d/cert-rotation \
     && chmod 0440 /etc/sudoers.d/cert-rotation \
     && mkdir -p /app/secrets \
-    && printf '-----BEGIN PRIVATE KEY-----\nMIIBVexampleSyntheticRotationSigningKeyDoNotUse==\n-----END PRIVATE KEY-----\n' > /app/secrets/rotation_signing.key \
+    && printf '%s\n' '-----BEGIN PRIVATE KEY-----' 'MIIBVexampleSyntheticRotationSigningKeyDoNotUse==' '-----END PRIVATE KEY-----' > /app/secrets/rotation_signing.key \
     && chmod 0644 /app/secrets/rotation_signing.key
