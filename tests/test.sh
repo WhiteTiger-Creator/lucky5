@@ -8,7 +8,7 @@ mkdir -p /logs/verifier
 if [ "$PWD" = "/" ]; then
     echo "Error: No working directory set. Please set a WORKDIR in your Dockerfile before running this script."
     echo 0 > /logs/verifier/reward.txt
-    exit 1
+    exit 0
 fi
 
 set +e

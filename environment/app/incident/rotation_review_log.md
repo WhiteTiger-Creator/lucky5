@@ -1867,6 +1867,7 @@ Historical CSV exports remain archived and non-authoritative for the JSON reconc
 ### Review entry 0457 — staging lane
 Shift lead logged a routine rotation observation for staging (west) during review window 0457. Quarterly access recertification touched this lane; no compile-relevant configuration changed.
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
+> **Governance decision (2026-05-12 - #CR-5328)** Priya: closing the densely-chained-env thread — for envs sitting on a wide certificate chain the trust term was dominating `stability_index` and dragging otherwise quiet windows up on connectivity alone, so that contribution is now ceilinged: `stability_index = volatility_index + defer_pressure_score + ledger_pressure_score + min(trust_exposure_score // 2, 12)`. The 12-point trust ceiling revises #CR-5320; the priority integration recorded there — critical at `trust_exposure_score >= 24`, otherwise high at `>= 12` — is unchanged, as are the volatility and defer formulas.
 
 ### Review entry 0458 — lab lane
 Shift lead logged a routine rotation observation for lab (north) during review window 0458. Vendor ticket on renewal-callback retries closed; delivery within contractual budget.

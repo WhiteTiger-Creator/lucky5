@@ -532,7 +532,7 @@ def build_response_queue(
                 volatility_index
                 + defer_pressure_score
                 + ledger_pressure_score
-                + (window["trust_exposure_score"] // 2)
+                + min(window["trust_exposure_score"] // 2, 12)
             )
             if (
                 window["max_severity"] == "p1"

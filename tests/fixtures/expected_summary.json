@@ -697,7 +697,7 @@
       "max_ledger_pressure_score": 5,
       "max_trust_exposure_score": 26,
       "max_carry_out_ms": 415,
-      "max_stability_index": 16,
+      "max_stability_index": 15,
       "canonical_alert_checksum": "9a9be3b88cb479d8b716ea2b22359baa115b279000ab850407f20ed1caf40484",
       "queue_hash_checksum": "72cf00760ff5f27b3ac306e415e718996aa143a4303a705bbc42ff651f2a4671",
       "freeze_compaction_checksum": "e413e0df5b5ebf1883a68e0dec054e38858ca6e325ee3179b5e19c6f4b4ec0aa",
@@ -705,7 +705,7 @@
       "rotation_compaction_checksum": "1e5bae28bbed7fc11a2b0cdeea93b6e3d6701a24944f9dc3cdab2ca71f70f76b",
       "defer_compaction_checksum": "9d16fa074fcfce82139fbd87f47f984f859f37c9f9046a714ea892eebad7b9a2",
       "trust_edge_checksum": "ed7c2cae8f3ac224b0d8ac70f03afb20c2f275f3f1cd9b763bc4d07af20a63f9",
-      "window_digest_checksum": "5f8caed566aad2fd0004da7fe50158c40857c66fa68a685adee0a2b36a35d242",
+      "window_digest_checksum": "b1afe878125839e37fd4178535bc23d5b3ccde4619abfa72e545b271bd4bc333",
       "ledger_checksum": "03650c688c10aa5a21d7a5cc2408a4f9f20e5e20f0c8bd07caeeaf95d0d7dd74",
       "trust_path_digest_checksum": "98aa77d993025b70542682cb65144ea0712bdba0f7d5056c36efbd046ff70ae3"
     },
@@ -907,10 +907,10 @@
         "volatility_index": 0,
         "defer_pressure_score": 0,
         "ledger_pressure_score": 3,
-        "stability_index": 16,
+        "stability_index": 15,
         "priority": "critical",
         "queue_hash": "b41317709d9b",
-        "window_digest": "74a591ca01"
+        "window_digest": "4bbcdf9c92"
       }
     ]
   }

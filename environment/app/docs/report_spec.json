@@ -46,6 +46,9 @@
     ],
     "token_check_scope": "executable code only (exclude comments and docstrings)"
   },
+  "digest_payloads": {
+    "trust_path_digest": "first 12 lowercase hex chars of sha256(origin|trust_exposure_score|semicolon_joined_target_rows), where each target row in trust_reachable_envs order is target:score:path_nodes_joined_by_>"
+  },
   "response_queue": {
     "output_path": "response_queue.jsonl",
     "ticket_id_format": "{env}:{start_ms}-{end_ms}",
@@ -141,6 +144,7 @@
       "p3",
       "p4"
     ],
+    "severity_counts_contract": "severity_counts carries one entry per severity in severity_counts_key_order, in that order, including severities with no canonical alerts; those are emitted with a count of 0 rather than omitted",
     "total_unmuted_duration_ms_contract": "sum of merged window duration_ms values from drift_windows.json (not raw alert durations)",
     "total_ledger_adjusted_actionable_ms_contract": "sum ledger_adjusted_actionable_ms over all drift windows, including windows not admitted to the response queue",
     "maximum_aggregation_domains": {
@@ -217,9 +221,6 @@
       "max_severity"
     ],
     "field_policy": "Each window row carries EXACTLY the required_fields keys \u2014 no extras and no omissions. Queue-level fields (ticket_id, priority, queue_hash, window_digest, stability_pressure_score, volatility_index, defer_pressure_score, ledger_pressure_score, stability_index) belong only to response_queue.jsonl rows. env is the top-level map key, not a row field."
-  },
-  "digest_payloads": {
-    "trust_path_digest": "first 12 lowercase hex chars of sha256(origin|trust_exposure_score|semicolon_joined_target_rows), where each target row in trust_reachable_envs order is target:score:path_nodes_joined_by_>"
   },
   "semantics_source": {
     "notes": "This document is the output contract only: file paths, schemas, required fields, repair tokens, digest payloads and checksum serialization. It does NOT define how values are derived.",
