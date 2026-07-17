@@ -439,6 +439,7 @@ def build_drift_windows(
             carry_out_ms = min(
                 carry_in_ms
                 + window["actionable_duration_ms"]
+                + (window["freeze_segment_count"] * 8)
                 + (window["rotation_segment_count"] * 15)
                 + (window["defer_segment_count"] * 10),
                 2000,

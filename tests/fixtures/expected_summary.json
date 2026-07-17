@@ -48,14 +48,14 @@
       "max_carry_out_ms": 500,
       "max_stability_index": 23,
       "canonical_alert_checksum": "010f5519c5a212634ad86b68d864d3ce1761756dcc8de55885536542c5b46338",
-      "queue_hash_checksum": "3f235cbfae644bdf75981790b514876fb620f23e2910700f1dc01c18cd8da69e",
+      "queue_hash_checksum": "6bdfa673a05d0524f9fc4ef46a429f1bd1d91fd78229696ade13e3324d8de5cd",
       "freeze_compaction_checksum": "e413e0df5b5ebf1883a68e0dec054e38858ca6e325ee3179b5e19c6f4b4ec0aa",
       "reopen_compaction_checksum": "cadde4a4b5eea10feecc0208f31345101c92c44fbc2e0232a29f6136ca936db2",
       "rotation_compaction_checksum": "1e5bae28bbed7fc11a2b0cdeea93b6e3d6701a24944f9dc3cdab2ca71f70f76b",
       "defer_compaction_checksum": "9d16fa074fcfce82139fbd87f47f984f859f37c9f9046a714ea892eebad7b9a2",
       "trust_edge_checksum": "ed7c2cae8f3ac224b0d8ac70f03afb20c2f275f3f1cd9b763bc4d07af20a63f9",
       "window_digest_checksum": "fb63482362771724512893594d4427fb2eb12d8f699609c63ba642c8cc369077",
-      "ledger_checksum": "098a654d4b5e5671a1c8a8eef9fef0fd0360f5e6fd969616726903d84d862679",
+      "ledger_checksum": "8dd3e3a96635586725770e6a682479252d4f671a5b5fb8115778b3e5df6a3ac5",
       "trust_path_digest_checksum": "7bf16b0aeb39a93e8e350adf51aa2c180c73d4b24ecbb59d284d936620ae53bc"
     },
     "windows": {
@@ -121,7 +121,7 @@
           "max_severity": "p1",
           "idle_gap_ms": 1100,
           "carry_in_ms": 0,
-          "carry_out_ms": 0,
+          "carry_out_ms": 8,
           "ledger_adjusted_actionable_ms": 0,
           "trust_reachable_envs": [
             "edge",
@@ -198,7 +198,7 @@
           "max_severity": "p1",
           "idle_gap_ms": 1800,
           "carry_in_ms": 0,
-          "carry_out_ms": 273,
+          "carry_out_ms": 281,
           "ledger_adjusted_actionable_ms": 248,
           "trust_reachable_envs": [
             "edge",
@@ -238,7 +238,7 @@
           "max_severity": "p2",
           "idle_gap_ms": 0,
           "carry_in_ms": 0,
-          "carry_out_ms": 164,
+          "carry_out_ms": 172,
           "ledger_adjusted_actionable_ms": 129,
           "trust_reachable_envs": [
             "dmz",
@@ -316,7 +316,7 @@
           "max_severity": "p2",
           "idle_gap_ms": 2100,
           "carry_in_ms": 0,
-          "carry_out_ms": 150,
+          "carry_out_ms": 158,
           "ledger_adjusted_actionable_ms": 150,
           "trust_reachable_envs": [
             "dmz",
@@ -396,7 +396,7 @@
           "max_severity": "p1",
           "idle_gap_ms": 0,
           "carry_in_ms": 0,
-          "carry_out_ms": 150,
+          "carry_out_ms": 158,
           "ledger_adjusted_actionable_ms": 150,
           "trust_reachable_envs": [
             "dmz",
@@ -513,7 +513,7 @@
           "max_severity": "p1",
           "idle_gap_ms": 1900,
           "carry_in_ms": 0,
-          "carry_out_ms": 0,
+          "carry_out_ms": 8,
           "ledger_adjusted_actionable_ms": 0,
           "trust_reachable_envs": [
             "dmz",
@@ -630,7 +630,7 @@
         "actionable_duration_ms": 248,
         "idle_gap_ms": 1800,
         "carry_in_ms": 0,
-        "carry_out_ms": 273,
+        "carry_out_ms": 281,
         "ledger_adjusted_actionable_ms": 248,
         "trust_reachable_envs": [
           "edge",
@@ -656,7 +656,7 @@
         "ledger_pressure_score": 4,
         "stability_index": 23,
         "priority": "critical",
-        "queue_hash": "d5323b91d620",
+        "queue_hash": "99042ae5ee21",
         "window_digest": "79ee91e64c"
       }
     ]

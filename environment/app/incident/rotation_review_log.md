@@ -1264,6 +1264,7 @@ Thread archived; see the #CR decision entries for anything affecting reconciler 
 ### Review entry 0308 — core lane
 Shift lead logged a routine rotation observation for core (east) during review window 0308. Vendor ticket on renewal-callback retries closed; delivery within contractual budget.
 Historical CSV exports remain archived and non-authoritative for the JSON reconciler acceptance.
+> **Governance decision (2026-05-13 - #CR-5330)** Yusuf: renewal review found that a window sitting under a change-freeze still leaves residual rotation debt the ledger was dropping, so each freeze segment now carries the same class of credit the rotation and defer segments already do: `carry_out_ms = min(carry_in_ms + actionable_duration_ms + freeze_segment_count*8 + rotation_segment_count*15 + defer_segment_count*10, 2000)`. The 8-point freeze credit revises the carry_out formula in #CR-5313; the //2 idle decay, the 2000 cap, and the rotation and defer credits recorded there are unchanged.
 
 ### Review entry 0309 — dmz lane
 Shift lead logged a routine rotation observation for dmz (west) during review window 0309. Capacity review noted rising alert volume; thresholds unchanged outside the governance process.
