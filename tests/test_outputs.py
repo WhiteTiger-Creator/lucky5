@@ -543,7 +543,7 @@ def test_trust_edge_source_path_affects_output(tmp_path: Path):
 
 
 def test_trust_exposure_uses_strongest_bounded_simple_paths(tmp_path: Path):
-    """Trust exposure scores come from the strongest bounded simple directed paths through the edge graph."""
+    """Trust exposure scores is the max-weight node-disjoint packing of bounded simple directed paths."""
     original = TRUST_EDGES_PATH.read_text(encoding="utf-8")
     try:
         edges = [
@@ -584,16 +584,16 @@ def test_trust_exposure_uses_strongest_bounded_simple_paths(tmp_path: Path):
             "target",
             "vault",
         ]
-        assert window["trust_exposure_score"] == 33
+        assert window["trust_exposure_score"] == 18
         assert window["trust_strongest_path"] == ["lab", "a", "deep", "vault"]
         digest_payload = (
-            "lab|33|a:4:lab>a;b:4:lab>b;deep:7:lab>a>deep;"
+            "lab|18|a:4:lab>a;b:4:lab>b;deep:7:lab>a>deep;"
             "target:9:lab>a>target;vault:9:lab>a>deep>vault"
         )
         assert window["trust_path_digest"] == hashlib.sha256(
             digest_payload.encode("utf-8")
         ).hexdigest()[:12]
-        assert queue[0]["trust_exposure_score"] == 33
+        assert queue[0]["trust_exposure_score"] == 18
         assert queue[0]["priority"] == "critical"
         trust_payload = (
             "a|deep|3\na|target|5\nb|target|5\ndeep|vault|2\n"

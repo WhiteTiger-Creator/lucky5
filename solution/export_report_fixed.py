@@ -223,6 +223,49 @@ def canonicalize_trust_edges(rows: list[dict]) -> dict[str, dict[str, int]]:
     }
 
 
+def _max_disjoint_trust_packing(
+    origin: str,
+    trust_edges: dict[str, dict[str, int]],
+    hop_bound: int = 3,
+) -> int:
+    """Maximum total weight of node-disjoint simple paths out of `origin`.
+
+    Enumerate every simple directed path of 1..hop_bound edges starting at
+    `origin` (weight = sum of edge weights, node set = its non-origin nodes),
+    then select a set of those paths sharing no non-origin node that maximises the
+    summed weight. This is NOT the sum of each target's strongest path — paths
+    that reuse a node cannot both be counted.
+    """
+    paths: list[tuple[int, frozenset[str]]] = []
+
+    def enumerate_paths(node: str, weight: int, nodes: frozenset[str], depth: int) -> None:
+        for target, edge_weight in trust_edges.get(node, {}).items():
+            if target == origin or target in nodes:
+                continue
+            reached = nodes | {target}
+            paths.append((weight + edge_weight, reached))
+            if depth + 1 < hop_bound:
+                enumerate_paths(target, weight + edge_weight, reached, depth + 1)
+
+    enumerate_paths(origin, 0, frozenset(), 0)
+
+    best_total = 0
+
+    def pack(index: int, used: frozenset[str], total: int) -> None:
+        nonlocal best_total
+        if total > best_total:
+            best_total = total
+        if index >= len(paths):
+            return
+        pack(index + 1, used, total)
+        weight, nodes = paths[index]
+        if not (nodes & used):
+            pack(index + 1, used | nodes, total + weight)
+
+    pack(0, frozenset(), 0)
+    return best_total
+
+
 def strongest_trust_exposure(
     origin: str,
     trust_edges: dict[str, dict[str, int]],
@@ -248,7 +291,7 @@ def strongest_trust_exposure(
 
     visit(origin, 0, (origin,))
     reachable = sorted(best)
-    exposure_score = sum(best[target][0] for target in reachable)
+    exposure_score = _max_disjoint_trust_packing(origin, trust_edges, 3)
     strongest_path: tuple[str, ...] = (origin,)
     strongest_score = 0
     for target in reachable:
