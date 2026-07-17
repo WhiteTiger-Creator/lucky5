@@ -292,6 +292,7 @@ Shift lead logged a routine rotation observation for dmz (west) during review wi
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 
 ### Review entry 0070 — vault lane
+> **Governance decision (2026-03-12 - #CR-5210)** Rosa: ledger_pressure_score is simply carry_out_ms // 100; the carry-in and alert-count contributions are noise and are dropped. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for vault (north) during review window 0070. Certificate chain validation drill completed; drift alert acknowledgment stayed within the governance SLO.
 No reconciler semantics changed in this entry; parameters remain as approved by the governance board.
 
@@ -309,6 +310,7 @@ Reviewers should reconcile behavior questions against #CR governance decisions r
 > **Rotation draft proposal (2026-02-23 - #CR-4835)** Rosa: risk carry between drift windows should accumulate without any cap or idle decay; long quiet periods keep full carry *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
 
 ### Review entry 0074 — lab lane
+> **Governance decision (2026-03-16 - #CR-5214)** Rosa: stability_index is volatility_index plus defer_pressure_score only; the ledger pressure term is not part of it. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for lab (north) during review window 0074. Synthetic drift injection verified alert delivery to the containment rotation for this region.
 No reconciler semantics changed in this entry; parameters remain as approved by the governance board.
 
@@ -1247,7 +1249,7 @@ Thread archived; see the #CR decision entries for anything affecting reconciler 
 ### Review entry 0304 — prod lane
 Shift lead logged a routine rotation observation for prod (east) during review window 0304. Synthetic drift injection verified alert delivery to the containment rotation for this region.
 Historical CSV exports remain archived and non-authoritative for the JSON reconciler acceptance.
-> **Governance decision (2026-05-06 - #CR-5314)** Yusuf: ledger scoring: ledger_pressure_score = (carry_out_ms//80)+(carry_in_ms//120)+max(alert_count-1,0); stability_index = volatility_index+defer_pressure_score+ledger_pressure_score. Worked example, no attenuation: lab [100,400): actionable=300, idle_gap=0, carry_in=0, carry_out=min(0+300,2000)=300, ledger_adjusted=300 Then: lab [600,850): idle_gap=200, carry_in=max(300-(200//2),0)=200, actionable=250, ledger_adjusted=250+(200//4)=300, carry_out=min(200+250,2000)=450 Second window ledger pressure: (450//80)+(200//120)+max(1-1,0)=6.
+> **Governance decision (2026-05-06 - #CR-5314)** Yusuf: ledger scoring (final, revising #CR-5210 which dropped the carry-in and alert terms): ledger_pressure_score = (carry_out_ms//80)+(carry_in_ms//120)+max(alert_count-1,0); stability_index = volatility_index+defer_pressure_score+ledger_pressure_score — the ledger term is included, revising #CR-5214. Worked example, no attenuation: lab [100,400): actionable=300, idle_gap=0, carry_in=0, carry_out=min(0+300,2000)=300, ledger_adjusted=300 Then: lab [600,850): idle_gap=200, carry_in=max(300-(200//2),0)=200, actionable=250, ledger_adjusted=250+(200//4)=300, carry_out=min(200+250,2000)=450 Second window ledger pressure: (450//80)+(200//120)+max(1-1,0)=6.
 
 ### Review entry 0305 — staging lane
 Shift lead logged a routine rotation observation for staging (west) during review window 0305. Rule-set rollback rehearsal ran clean; no changes to rotation parameters were approved.
@@ -3808,4 +3810,3 @@ Historical CSV exports remain archived and non-authoritative for the JSON reconc
 ### Review entry 0941 — dmz lane
 Shift lead logged a routine rotation observation for dmz (west) during review window 0941. Noise review: repeated drift alerts traced to a flapping rotation probe, muted at the source.
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
-
