@@ -322,6 +322,7 @@ Shift lead logged a routine rotation observation for edge (central) during revie
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
 
 ### Review entry 0076 — core lane
+> **Governance decision (2026-03-26 - #CR-5231)** Rosa: trust_exposure_score is the single greatest retained path_score across reachable targets, not the sum of them. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for core (east) during review window 0076. Noise review: repeated drift alerts traced to a flapping policy probe, muted at the source.
 Historical CSV exports remain archived and non-authoritative for the JSON reconciler acceptance.
 
@@ -330,6 +331,7 @@ Shift lead logged a routine rotation observation for dmz (west) during review wi
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 
 ### Review entry 0078 — vault lane
+> **Governance decision (2026-03-28 - #CR-5233)** Rosa: when two trust paths to a target tie on path_score, retain the lexicographically largest node sequence. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for vault (north) during review window 0078. Vendor ticket on renewal-callback retries closed; delivery within contractual budget.
 No reconciler semantics changed in this entry; parameters remain as approved by the governance board.
 
@@ -1508,7 +1510,7 @@ No reconciler semantics changed in this entry; parameters remain as approved by 
 ### Review entry 0367 — fabric lane
 Shift lead logged a routine rotation observation for fabric (central) during review window 0367. Quarterly access recertification touched this lane; no compile-relevant configuration changed.
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
-> **Governance decision (2026-05-08 - #CR-5319)** Priya: trust retention: for each reachable target retain the path with greatest path_score; on equal score retain the lexicographically smallest full node sequence. trust_reachable_envs: all retained target names sorted ascending. trust_exposure_score: sum retained strongest path scores across trust_reachable_envs; use 0 when no target is reachable. trust_strongest_path: among retained target paths choose greatest path_score, then lexicographically smallest full node sequence; use [origin_env] when no target is reachable.
+> **Governance decision (2026-05-08 - #CR-5319)** Priya: trust retention (final, revising #CR-5233 which broke score ties toward the largest sequence): for each reachable target retain the path with greatest path_score; on equal score retain the lexicographically smallest full node sequence. trust_reachable_envs: all retained target names sorted ascending. trust_exposure_score: sum retained strongest path scores across trust_reachable_envs (final, revising #CR-5231 which kept only the single greatest path); use 0 when no target is reachable. trust_strongest_path: among retained target paths choose greatest path_score, then lexicographically smallest full node sequence; use [origin_env] when no target is reachable.
 
 ### Review entry 0368 — prod lane
 Shift lead logged a routine rotation observation for prod (east) during review window 0368. Vendor ticket on renewal-callback retries closed; delivery within contractual budget.
