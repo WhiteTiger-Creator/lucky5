@@ -211,6 +211,7 @@ Reviewers should reconcile behavior questions against #CR governance decisions r
 > **Rotation draft proposal (2026-02-17 - #CR-4822)** Rosa: reopen, rotation and defer rows with unrecognized severity_scope values should be normalized to scope 'all' so no window is lost *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
 
 ### Review entry 0050 — lab lane
+> **Governance decision (2026-03-09 - #CR-5209)** Rosa: dedupe keeps the first-seen row per alert_id in input order; end_ms and severity rank do not override that. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for lab (north) during review window 0050. Certificate chain validation drill completed; drift alert acknowledgment stayed within the governance SLO.
 No reconciler semantics changed in this entry; parameters remain as approved by the governance board.
 
@@ -219,10 +220,12 @@ Shift lead logged a routine rotation observation for edge (central) during revie
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
 
 ### Review entry 0052 — core lane
+> **Governance decision (2026-03-14 - #CR-5216)** Rosa: volatility_index is stability_pressure_score plus rotation_segment_count*2, with no probe-window terms. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for core (east) during review window 0052. Change-board reviewed stale exception approvals; owners pinged before the next rotation cycle.
 Historical CSV exports remain archived and non-authoritative for the JSON reconciler acceptance.
 
 ### Review entry 0053 — dmz lane
+> **Governance decision (2026-03-18 - #CR-5219)** Rosa: stability_index folds in the full trust_exposure_score with no halving and no cap. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for dmz (west) during review window 0053. certificate chain trust edge audit sampled cross-account roles; no reconciler-relevant findings for this lane.
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 
@@ -569,7 +572,7 @@ Thread archived; see the #CR decision entries for anything affecting reconciler 
 ### Review entry 0136 — prod lane
 Shift lead logged a routine rotation observation for prod (east) during review window 0136. Noise review: repeated drift alerts traced to a flapping policy probe, muted at the source.
 Historical CSV exports remain archived and non-authoritative for the JSON reconciler acceptance.
-> **Governance decision (2026-05-02 - #CR-5302)** Yusuf: deduplication by alert_id: keep highest end_ms; tie-break by severity rank p1>p2>p3>p4, then longer normalized signature, then lexicographically larger normalized env; if still tied keep first seen row in input order. This supersedes #CR-4815.
+> **Governance decision (2026-05-02 - #CR-5302)** Yusuf: deduplication by alert_id (final, revising #CR-5209 which kept the first-seen row): keep highest end_ms; tie-break by severity rank p1>p2>p3>p4, then longer normalized signature, then lexicographically larger normalized env; if still tied keep first seen row in input order. This supersedes #CR-4815.
 
 ### Review entry 0137 — staging lane
 Shift lead logged a routine rotation observation for staging (west) during review window 0137. Quarterly access recertification touched this lane; no compile-relevant configuration changed.
@@ -909,7 +912,7 @@ Thread archived; see the #CR decision entries for anything affecting reconciler 
 ### Review entry 0220 — core lane
 Shift lead logged a routine rotation observation for core (east) during review window 0220. Certificate chain validation drill completed; drift alert acknowledgment stayed within the governance SLO.
 Historical CSV exports remain archived and non-authoritative for the JSON reconciler acceptance.
-> **Governance decision (2026-05-04 - #CR-5308)** Priya: rotation layer: scope allowlist ['all', 'p1', 'p2']; normalize env/scope/start/end, keep rows whose severity_scope is in scope_values, drop end<=start, compact overlap/touch intervals per (env,severity_scope). Matching scopes: {all,max_severity} for each window; if max_severity is p2 and (env,p2) has no compacted intervals, borrow (env,p1) as the severity scope fallback. Union: collect overlap segments from matching scopes then compact/union those segments to compute rotation_overlap_ms and rotation_segment_count. dispatchable_duration_ms = max(risk_adjusted_duration_ms - (rotation_overlap_ms // 3), 0) — the //3 divisor is final and revises #CR-5217. volatility_index: stability_pressure_score + (all_rotation_probe_ms//24) + (severity_rotation_probe_ms//16) + (rotation_segment_count*2) where probe is [end_ms-240,end_ms+1).
+> **Governance decision (2026-05-04 - #CR-5308)** Priya: rotation layer: scope allowlist ['all', 'p1', 'p2']; normalize env/scope/start/end, keep rows whose severity_scope is in scope_values, drop end<=start, compact overlap/touch intervals per (env,severity_scope). Matching scopes: {all,max_severity} for each window; if max_severity is p2 and (env,p2) has no compacted intervals, borrow (env,p1) as the severity scope fallback. Union: collect overlap segments from matching scopes then compact/union those segments to compute rotation_overlap_ms and rotation_segment_count. dispatchable_duration_ms = max(risk_adjusted_duration_ms - (rotation_overlap_ms // 3), 0) — the //3 divisor is final and revises #CR-5217. volatility_index (final, revising #CR-5216 which dropped the probe terms): stability_pressure_score + (all_rotation_probe_ms//24) + (severity_rotation_probe_ms//16) + (rotation_segment_count*2) where probe is [end_ms-240,end_ms+1).
 
 ### Review entry 0221 — dmz lane
 Shift lead logged a routine rotation observation for dmz (west) during review window 0221. Dashboard tiles for drift volume lagged during rule refresh; attributed to cache staleness, not the reconciler.
@@ -1870,7 +1873,7 @@ Historical CSV exports remain archived and non-authoritative for the JSON reconc
 ### Review entry 0457 — staging lane
 Shift lead logged a routine rotation observation for staging (west) during review window 0457. Quarterly access recertification touched this lane; no compile-relevant configuration changed.
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
-> **Governance decision (2026-05-12 - #CR-5328)** Priya: closing the densely-chained-env thread — for envs sitting on a wide certificate chain the trust term was dominating `stability_index` and dragging otherwise quiet windows up on connectivity alone, so that contribution is now ceilinged: `stability_index = volatility_index + defer_pressure_score + ledger_pressure_score + min(trust_exposure_score // 2, 12)`. The 12-point trust ceiling revises #CR-5320; the priority integration recorded there — critical at `trust_exposure_score >= 24`, otherwise high at `>= 12` — is unchanged, as are the volatility and defer formulas.
+> **Governance decision (2026-05-12 - #CR-5328)** Priya: closing the densely-chained-env thread — this halved, capped trust contribution is final and revises the uncapped full-trust form in #CR-5219; — for envs sitting on a wide certificate chain the trust term was dominating `stability_index` and dragging otherwise quiet windows up on connectivity alone, so that contribution is now ceilinged: `stability_index = volatility_index + defer_pressure_score + ledger_pressure_score + min(trust_exposure_score // 2, 12)`. The 12-point trust ceiling revises #CR-5320; the priority integration recorded there — critical at `trust_exposure_score >= 24`, otherwise high at `>= 12` — is unchanged, as are the volatility and defer formulas.
 
 ### Review entry 0458 — lab lane
 Shift lead logged a routine rotation observation for lab (north) during review window 0458. Vendor ticket on renewal-callback retries closed; delivery within contractual budget.
