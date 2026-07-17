@@ -43,18 +43,18 @@
       "max_stability_pressure_score": 5,
       "max_volatility_index": 7,
       "max_defer_pressure_score": 1,
-      "max_ledger_pressure_score": 4,
+      "max_ledger_pressure_score": 5,
       "max_trust_exposure_score": 23,
       "max_carry_out_ms": 500,
-      "max_stability_index": 23,
+      "max_stability_index": 24,
       "canonical_alert_checksum": "010f5519c5a212634ad86b68d864d3ce1761756dcc8de55885536542c5b46338",
-      "queue_hash_checksum": "6bdfa673a05d0524f9fc4ef46a429f1bd1d91fd78229696ade13e3324d8de5cd",
+      "queue_hash_checksum": "546c4c9cad6c374c70cea8ff957e8c23ed97c4f75a616725ccb3464717d8872e",
       "freeze_compaction_checksum": "e413e0df5b5ebf1883a68e0dec054e38858ca6e325ee3179b5e19c6f4b4ec0aa",
       "reopen_compaction_checksum": "cadde4a4b5eea10feecc0208f31345101c92c44fbc2e0232a29f6136ca936db2",
       "rotation_compaction_checksum": "1e5bae28bbed7fc11a2b0cdeea93b6e3d6701a24944f9dc3cdab2ca71f70f76b",
       "defer_compaction_checksum": "9d16fa074fcfce82139fbd87f47f984f859f37c9f9046a714ea892eebad7b9a2",
       "trust_edge_checksum": "ed7c2cae8f3ac224b0d8ac70f03afb20c2f275f3f1cd9b763bc4d07af20a63f9",
-      "window_digest_checksum": "fb63482362771724512893594d4427fb2eb12d8f699609c63ba642c8cc369077",
+      "window_digest_checksum": "7c3bb503ac39e99ba2c7b584d14fd729787502a72477077b96fca8cb7b46af03",
       "ledger_checksum": "8dd3e3a96635586725770e6a682479252d4f671a5b5fb8115778b3e5df6a3ac5",
       "trust_path_digest_checksum": "7bf16b0aeb39a93e8e350adf51aa2c180c73d4b24ecbb59d284d936620ae53bc"
     },
@@ -653,11 +653,11 @@
         "stability_pressure_score": 5,
         "volatility_index": 7,
         "defer_pressure_score": 1,
-        "ledger_pressure_score": 4,
-        "stability_index": 23,
+        "ledger_pressure_score": 5,
+        "stability_index": 24,
         "priority": "critical",
-        "queue_hash": "99042ae5ee21",
-        "window_digest": "79ee91e64c"
+        "queue_hash": "5bba438052db",
+        "window_digest": "ff4e0727a4"
       }
     ]
   },
@@ -694,18 +694,18 @@
       "max_stability_pressure_score": 1,
       "max_volatility_index": 1,
       "max_defer_pressure_score": 0,
-      "max_ledger_pressure_score": 5,
+      "max_ledger_pressure_score": 7,
       "max_trust_exposure_score": 26,
       "max_carry_out_ms": 415,
-      "max_stability_index": 15,
+      "max_stability_index": 17,
       "canonical_alert_checksum": "9a9be3b88cb479d8b716ea2b22359baa115b279000ab850407f20ed1caf40484",
-      "queue_hash_checksum": "72cf00760ff5f27b3ac306e415e718996aa143a4303a705bbc42ff651f2a4671",
+      "queue_hash_checksum": "9d0dacb82784d00f1efb0e4b749ce24dd7a66ae082971bd7a182d979024864bc",
       "freeze_compaction_checksum": "e413e0df5b5ebf1883a68e0dec054e38858ca6e325ee3179b5e19c6f4b4ec0aa",
       "reopen_compaction_checksum": "cadde4a4b5eea10feecc0208f31345101c92c44fbc2e0232a29f6136ca936db2",
       "rotation_compaction_checksum": "1e5bae28bbed7fc11a2b0cdeea93b6e3d6701a24944f9dc3cdab2ca71f70f76b",
       "defer_compaction_checksum": "9d16fa074fcfce82139fbd87f47f984f859f37c9f9046a714ea892eebad7b9a2",
       "trust_edge_checksum": "ed7c2cae8f3ac224b0d8ac70f03afb20c2f275f3f1cd9b763bc4d07af20a63f9",
-      "window_digest_checksum": "b1afe878125839e37fd4178535bc23d5b3ccde4619abfa72e545b271bd4bc333",
+      "window_digest_checksum": "c6f0ebacf8f9c0016a6ca3132ea1d213bea3e060b6fd4aca9a4a4931fe04634a",
       "ledger_checksum": "03650c688c10aa5a21d7a5cc2408a4f9f20e5e20f0c8bd07caeeaf95d0d7dd74",
       "trust_path_digest_checksum": "98aa77d993025b70542682cb65144ea0712bdba0f7d5056c36efbd046ff70ae3"
     },
@@ -857,11 +857,11 @@
         "stability_pressure_score": 1,
         "volatility_index": 1,
         "defer_pressure_score": 0,
-        "ledger_pressure_score": 5,
-        "stability_index": 6,
+        "ledger_pressure_score": 7,
+        "stability_index": 8,
         "priority": "critical",
-        "queue_hash": "4e650383d928",
-        "window_digest": "cade568b7d"
+        "queue_hash": "0eb70f48922e",
+        "window_digest": "5766dd3515"
       },
       {
         "ticket_id": "edge:600-910",
@@ -906,11 +906,11 @@
         "stability_pressure_score": 0,
         "volatility_index": 0,
         "defer_pressure_score": 0,
-        "ledger_pressure_score": 3,
-        "stability_index": 15,
+        "ledger_pressure_score": 5,
+        "stability_index": 17,
         "priority": "critical",
-        "queue_hash": "b41317709d9b",
-        "window_digest": "4bbcdf9c92"
+        "queue_hash": "d85dd9dc1cba",
+        "window_digest": "6598079b21"
       }
     ]
   }

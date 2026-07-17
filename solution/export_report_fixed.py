@@ -525,7 +525,7 @@ def build_response_queue(
                 + window["defer_segment_count"]
             )
             ledger_pressure_score = (
-                (window["carry_out_ms"] // 80)
+                (window["carry_out_ms"] // 60)
                 + (window["carry_in_ms"] // 120)
                 + max(window["alert_count"] - 1, 0)
             )

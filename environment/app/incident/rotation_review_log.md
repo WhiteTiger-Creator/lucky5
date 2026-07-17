@@ -1884,6 +1884,7 @@ No reconciler semantics changed in this entry; parameters remain as approved by 
 ### Review entry 0459 — edge lane
 Shift lead logged a routine rotation observation for edge (central) during review window 0459. Capacity review noted rising alert volume; thresholds unchanged outside the governance process.
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
+> **Governance decision (2026-05-13 - #CR-5331)** Yusuf: the carry-out term in the ledger pressure score was under-weighting sustained load, so its divisor is tightened from 80 to 60: `ledger_pressure_score = (carry_out_ms // 60) + (carry_in_ms // 120) + max(alert_count - 1, 0)`. The 60 carry-out divisor is final and revises the 80 recorded in #CR-5314 (whose worked example predates this change); the carry-in divisor and the alert term there are unchanged.
 
 ### Review entry 0460 — core lane
 Shift lead logged a routine rotation observation for core (east) during review window 0460. Certificate chain validation drill completed; drift alert acknowledgment stayed within the governance SLO.
