@@ -210,6 +210,8 @@ Shift lead logged a routine rotation observation for staging (west) during revie
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 > **Rotation draft proposal (2026-02-17 - #CR-4822)** Rosa: reopen, rotation and defer rows with unrecognized severity_scope values should be normalized to scope 'all' so no window is lost *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
 
+> **Rotation draft proposal (2026-02-18 - #CR-4824)** Anders: stability_pressure_score is (all_probe_ms//25)+(severity_probe_ms//18) over a look-back probe [end_ms-150, end_ms), with no alert-count adjustment *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
+
 ### Review entry 0050 — lab lane
 > **Governance decision (2026-03-09 - #CR-5209)** Rosa: dedupe keeps the first-seen row per alert_id in input order; end_ms and severity rank do not override that. *(Revised — see the 2026-05 governance review.)*
 Shift lead logged a routine rotation observation for lab (north) during review window 0050. Certificate chain validation drill completed; drift alert acknowledgment stayed within the governance SLO.
@@ -262,6 +264,8 @@ Shift lead logged a routine rotation observation for dmz (west) during review wi
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 > **Rotation draft proposal (2026-02-20 - #CR-4831)** Anders: an instant covered by both the all-scope and severity-scope probes must be deduplicated so it is counted once *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
 
+> **Rotation draft proposal (2026-02-21 - #CR-4833)** Rosa: volatility_index is stability_pressure_score plus (all_rotation_probe_ms//20)+(severity_rotation_probe_ms//14)+rotation_segment_count over a rotation probe [end_ms-200, end_ms) — rotation segments count once, not doubled *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
+
 ### Review entry 0062 — vault lane
 Shift lead logged a routine rotation observation for vault (north) during review window 0062. Change-board reviewed stale exception approvals; owners pinged before the next rotation cycle.
 No reconciler semantics changed in this entry; parameters remain as approved by the governance board.
@@ -311,6 +315,10 @@ Historical CSV exports remain archived and non-authoritative for the JSON reconc
 Shift lead logged a routine rotation observation for staging (west) during review window 0073. certificate chain trust edge audit sampled cross-account roles; no reconciler-relevant findings for this lane.
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 > **Rotation draft proposal (2026-02-23 - #CR-4835)** Rosa: risk carry between drift windows should accumulate without any cap or idle decay; long quiet periods keep full carry *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
+
+> **Rotation draft proposal (2026-02-24 - #CR-4837)** Anders: ledger_pressure_score is carry_out_ms//120 plus carry_in_ms//150, with no alert-count term *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
+
+> **Rotation draft proposal (2026-02-25 - #CR-4838)** Rosa: defer_pressure_score is a look-back probe [end_ms-250, end_ms) scored (all_defer_probe_ms//36)+(severity_defer_probe_ms//24), plus defer_segment_count*2 *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
 
 ### Review entry 0074 — lab lane
 > **Governance decision (2026-03-16 - #CR-5214)** Rosa: stability_index is volatility_index plus defer_pressure_score only; the ledger pressure term is not part of it. *(Revised — see the 2026-05 governance review.)*
@@ -365,6 +373,10 @@ Historical CSV exports remain archived and non-authoritative for the JSON reconc
 Shift lead logged a routine rotation observation for dmz (west) during review window 0085. Rule-set rollback rehearsal ran clean; no changes to rotation parameters were approved.
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 > **Rotation draft proposal (2026-02-26 - #CR-4840)** Anders: trust traversal should allow revisiting nodes so cyclic trust loops accumulate exposure credit *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
+
+> **Rotation draft proposal (2026-02-27 - #CR-4842)** Rosa: trust_exposure_score is the count of reachable targets — one per reachable env, independent of path_score *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
+
+> **Rotation draft proposal (2026-02-28 - #CR-4844)** Anders: stability_index sums volatility_index, defer_pressure_score and the full trust_exposure_score; there is no separate ledger-pressure term and the trust term is not halved *(Superseded — reversed in the 2026-05 governance review; see the matching decision entry.)*
 
 ### Review entry 0086 — vault lane
 Shift lead logged a routine rotation observation for vault (north) during review window 0086. Noise review: repeated drift alerts traced to a flapping policy probe, muted at the source.
