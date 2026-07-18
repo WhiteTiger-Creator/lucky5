@@ -520,7 +520,9 @@ def build_response_queue(
         for window in windows:
             if window["max_severity"] not in {"p1", "p2"}:
                 continue
-            include_min_ms = 180 if window["max_severity"] == "p1" else 225
+            # Admission floors sit directly on the conditioned distribution, so a
+            # one-millisecond slip anywhere upstream flips queue membership.
+            include_min_ms = 222 if window["max_severity"] == "p1" else 231
             if window["ledger_adjusted_actionable_ms"] < include_min_ms:
                 continue
 
