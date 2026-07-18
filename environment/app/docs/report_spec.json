@@ -49,6 +49,43 @@
   "digest_payloads": {
     "trust_path_digest": "first 12 lowercase hex chars of sha256(origin|trust_exposure_score|semicolon_joined_target_rows), where each target row in trust_reachable_envs order is target:score:path_nodes_joined_by_>"
   },
+  "field_types": {
+    "_note": "Declares the literal vocabulary and JSON container type of fields whose spelling or shape the verifier matches exactly. These are output-format facts only; the governing rules that decide which value a given window receives live in the governance review log.",
+    "priority": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium"
+      ],
+      "note": "Exactly these three lowercase labels. Alternative schemes (P0/P1/P2, sev tiers, numeric ranks) are rejected. Which tier a queued window earns is governed by the log's priority decision."
+    },
+    "trust_reachable_envs": {
+      "type": "array",
+      "items": "string",
+      "order": "sorted ascending",
+      "note": "A JSON array of environment-name strings, never an object/mapping keyed by env. Which envs are reachable, and the path retention behind them, are governed by the log's trust decisions."
+    },
+    "trust_strongest_path": {
+      "type": "array",
+      "items": "string",
+      "note": "A JSON array of environment names giving the full node sequence, origin first."
+    },
+    "muted": {
+      "type": "boolean after canonicalization",
+      "coercion": "booleans unchanged; strings true/1/yes (after str(...).strip().lower()) -> true, all other strings -> false; any non-string non-boolean value -> Python bool(value)"
+    },
+    "severity_counts": {
+      "type": "object",
+      "keys": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ],
+      "note": "Always enumerates all four levels in this order, emitting 0 for levels with no canonical alerts."
+    }
+  },
   "response_queue": {
     "output_path": "response_queue.jsonl",
     "ticket_id_format": "{env}:{start_ms}-{end_ms}",
