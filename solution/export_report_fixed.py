@@ -409,7 +409,9 @@ def build_drift_windows(
             )
             compacted_reopen_segments = _compact_intervals(reopen_segments)
             reopen_overlap = sum(end - start for start, end in compacted_reopen_segments)
-            risk_adjusted_duration = max(effective_duration - (reopen_overlap // 2), 0)
+            # Reopen overlap is subtracted ROUNDED UP (ceil), per #CR-5307 final —
+            # revising the earlier floor form. ceil(x/2) = -(-x // 2).
+            risk_adjusted_duration = max(effective_duration - (-(-reopen_overlap // 2)), 0)
 
             rotation_all, rotation_severity = _scope_intervals_for_window(
                 rotation_map, env, window["max_severity"]

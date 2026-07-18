@@ -208,7 +208,7 @@ def test_windows_schema_and_sorting(primary_outputs):
                 row["duration_ms"] - row["freeze_overlap_ms"], 0
             )
             assert row["risk_adjusted_duration_ms"] == max(
-                row["effective_duration_ms"] - (row["reopen_overlap_ms"] // 2), 0
+                row["effective_duration_ms"] - (-(-row["reopen_overlap_ms"] // 2)), 0
             )
             assert row["dispatchable_duration_ms"] == max(
                 row["risk_adjusted_duration_ms"] - (row["rotation_overlap_ms"] // 3), 0
