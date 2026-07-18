@@ -2,73 +2,73 @@
   {
     "env": "prod",
     "severity_scope": "all",
-    "start_ms": 2010137004130,
-    "end_ms": 2010137004295
+    "start_ms": 2010137003787,
+    "end_ms": 2010137003875
   },
   {
     "env": "dmz",
     "severity_scope": "all",
-    "start_ms": 2010137201580,
-    "end_ms": 2010137201705
+    "start_ms": 2010137201297,
+    "end_ms": 2010137201363
   },
   {
     "env": "dmz",
     "severity_scope": "all",
-    "start_ms": 2010137202640,
-    "end_ms": 2010137202735
+    "start_ms": 2010137202333,
+    "end_ms": 2010137202397
   },
   {
     "env": "edge",
     "severity_scope": "all",
-    "start_ms": 2010137401670,
-    "end_ms": 2010137401835
+    "start_ms": 2010137401353,
+    "end_ms": 2010137401441
   },
   {
     "env": "edge",
     "severity_scope": "all",
-    "start_ms": 2010137404000,
-    "end_ms": 2010137404125
+    "start_ms": 2010137403809,
+    "end_ms": 2010137403875
   },
   {
     "env": "vault",
     "severity_scope": "all",
-    "start_ms": 2010137601920,
-    "end_ms": 2010137602015
+    "start_ms": 2010137601477,
+    "end_ms": 2010137601541
   },
   {
     "env": "core",
     "severity_scope": "all",
-    "start_ms": 2010137801440,
-    "end_ms": 2010137801605
+    "start_ms": 2010137801224,
+    "end_ms": 2010137801312
   },
   {
     "env": "core",
     "severity_scope": "all",
-    "start_ms": 2010137803200,
-    "end_ms": 2010137803325
+    "start_ms": 2010137803009,
+    "end_ms": 2010137803075
   },
   {
     "env": "core",
     "severity_scope": "all",
-    "start_ms": 2010137804090,
-    "end_ms": 2010137804185
+    "start_ms": 2010137803889,
+    "end_ms": 2010137803953
   },
   {
     "env": "dns",
     "severity_scope": "all",
-    "start_ms": 2010138004300,
-    "end_ms": 2010138004465
+    "start_ms": 2010138004103,
+    "end_ms": 2010138004191
   },
   {
     "env": "zone",
     "severity_scope": "all",
-    "start_ms": 2010138202600,
-    "end_ms": 2010138202725
+    "start_ms": 2010138202361,
+    "end_ms": 2010138202427
   },
   {
     "env": "zone",
     "severity_scope": "all",
-    "start_ms": 2010138203710,
-    "end_ms": 2010138203805
+    "start_ms": 2010138203500,
+    "end_ms": 2010138203564
   }
 ]

@@ -2,7 +2,7 @@
   {
     "alert_id": "p5001",
     "start_ms": 2010137001000,
-    "end_ms": 2010137001680,
+    "end_ms": 2010137001350,
     "severity": "p1",
     "env": "prod",
     "signature": "root trust anchor drift",
@@ -11,7 +11,7 @@
   {
     "alert_id": "p5002",
     "start_ms": 2010137002100,
-    "end_ms": 2010137002640,
+    "end_ms": 2010137002376,
     "severity": "p2",
     "env": "PROD",
     "signature": "csr signature mismatch",
@@ -20,7 +20,7 @@
   {
     "alert_id": "p5003",
     "start_ms": 2010137003300,
-    "end_ms": 2010137003900,
+    "end_ms": 2010137003607,
     "severity": "p1",
     "env": "prod",
     "signature": "revocation list expiry",
@@ -29,7 +29,7 @@
   {
     "alert_id": "d5004",
     "start_ms": 2010137201000,
-    "end_ms": 2010137201560,
+    "end_ms": 2010137201285,
     "severity": "p2",
     "env": "dmz",
     "signature": "leaf cert expiry within threshold",
@@ -37,8 +37,8 @@
   },
   {
     "alert_id": "d5005",
-    "start_ms": 2010137201590,
-    "end_ms": 2010137201830,
+    "start_ms": 2010137201315,
+    "end_ms": 2010137201439,
     "severity": "p1",
     "env": "Dmz ",
     "signature": "intermediate ca rotation drift",
@@ -47,7 +47,7 @@
   {
     "alert_id": "d5006",
     "start_ms": 2010137202400,
-    "end_ms": 2010137203040,
+    "end_ms": 2010137202731,
     "severity": "p1",
     "env": "dmz",
     "signature": "ocsp staple stale",
@@ -56,7 +56,7 @@
   {
     "alert_id": "c5007",
     "start_ms": 2010137401000,
-    "end_ms": 2010137401600,
+    "end_ms": 2010137401310,
     "severity": "p1",
     "env": "core",
     "signature": "san mismatch on renewal",
@@ -65,7 +65,7 @@
   {
     "alert_id": "c5008",
     "start_ms": 2010137401900,
-    "end_ms": 2010137402420,
+    "end_ms": 2010137402167,
     "severity": "p2",
     "env": "CORE ",
     "signature": "key rollover incomplete",
@@ -74,7 +74,7 @@
   {
     "alert_id": "c5009",
     "start_ms": 2010137402800,
-    "end_ms": 2010137403360,
+    "end_ms": 2010137403087,
     "severity": "p1",
     "env": "core",
     "signature": "chain order invalid",
@@ -83,7 +83,7 @@
   {
     "alert_id": "v5010",
     "start_ms": 2010137601000,
-    "end_ms": 2010137601720,
+    "end_ms": 2010137601369,
     "severity": "p1",
     "env": "vault",
     "signature": "root trust anchor drift",
@@ -92,7 +92,7 @@
   {
     "alert_id": "v5011",
     "start_ms": 2010137602600,
-    "end_ms": 2010137603100,
+    "end_ms": 2010137602854,
     "severity": "p2",
     "env": "vault",
     "signature": "csr signature mismatch",

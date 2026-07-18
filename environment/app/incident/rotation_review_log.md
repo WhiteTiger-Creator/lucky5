@@ -503,7 +503,7 @@ No reconciler semantics changed in this entry; parameters remain as approved by 
 ### Review entry 0115 — edge lane
 Shift lead logged a routine rotation observation for edge (central) during review window 0115. Rule-set rollback rehearsal ran clean; no changes to rotation parameters were approved.
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
-> **Governance decision (2026-05-02 - #CR-5301)** Yusuf: canonicalization: env — normalize env via str(...).strip().lower(); severity — normalize severity via str(...).strip().lower(); signature — collapse internal whitespace for signature; end_ms — coerce end_ms to int after trim; invalid -> 0, and the row is KEPT, not dropped (supersedes #CR-4812); muted — booleans unchanged; strings true/1/yes => true, all other strings => false; non-string/non-bool use Python bool(value).
+> **Governance decision (2026-05-02 - #CR-5301)** Yusuf: canonicalization: env — normalize env via str(...).strip().lower(); severity — normalize severity via str(...).strip().lower(), then if the normalized value is not one of p1, p2, p3, p4 it falls back to p4 (unrecognized severities are treated as p4, the lowest tier); signature — collapse internal whitespace for signature; end_ms — coerce end_ms to int after trim; invalid -> 0, and the row is KEPT, not dropped (supersedes #CR-4812); muted — booleans unchanged; strings true/1/yes => true, all other strings => false; non-string/non-bool use Python bool(value).
 
 ### Review entry 0116 — core lane
 Shift lead logged a routine rotation observation for core (east) during review window 0116. Noise review: repeated drift alerts traced to a flapping policy probe, muted at the source.
