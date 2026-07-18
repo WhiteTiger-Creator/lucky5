@@ -444,7 +444,8 @@ def build_drift_windows(
             )
             compacted_defer_segments = _compact_intervals(defer_segments)
             defer_overlap = sum(end - start for start, end in compacted_defer_segments)
-            actionable_duration = max(dispatchable_duration - (defer_overlap // 4), 0)
+            # Defer overlap subtracted ROUNDED UP (ceil) per the final defer decision. ceil(x/4)=-(-x//4).
+            actionable_duration = max(dispatchable_duration - (-(-defer_overlap // 4)), 0)
             normalized_windows.append(
                 {
                     "start_ms": window["start_ms"],

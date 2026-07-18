@@ -214,7 +214,7 @@ def test_windows_schema_and_sorting(primary_outputs):
                 row["risk_adjusted_duration_ms"] - (row["rotation_overlap_ms"] // 3), 0
             )
             assert row["actionable_duration_ms"] == max(
-                row["dispatchable_duration_ms"] - (row["defer_overlap_ms"] // 4), 0
+                row["dispatchable_duration_ms"] - (-(-row["defer_overlap_ms"] // 4)), 0
             )
             assert row["ledger_adjusted_actionable_ms"] == (
                 row["actionable_duration_ms"] + (row["carry_in_ms"] // 4)
@@ -780,7 +780,7 @@ def test_defer_compaction_and_scope_are_used(tmp_path: Path):
         assert first["defer_overlap_ms"] == 210
         assert first["defer_segment_count"] == 2
         assert first["actionable_duration_ms"] == max(
-            first["dispatchable_duration_ms"] - (210 // 4), 0
+            first["dispatchable_duration_ms"] - (-(-210 // 4)), 0
         )
         assert second["defer_overlap_ms"] == 0
         assert summary["total_defer_overlap_ms"] == 210
