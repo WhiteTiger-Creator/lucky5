@@ -1,11 +1,87 @@
 [
-  {"source_env": "prod", "target_env": "dmz", "weight": 5},
-  {"source_env": "PROD", "target_env": "dmz", "weight": 3},
-  {"source_env": "prod", "target_env": "edge", "weight": 4},
-  {"source_env": "dmz", "target_env": "edge", "weight": 6},
-  {"source_env": "dmz", "target_env": "vault", "weight": 7},
-  {"source_env": "edge", "target_env": "prod", "weight": 3},
-  {"source_env": "edge", "target_env": "vault", "weight": 2},
-  {"source_env": "vault", "target_env": "vault", "weight": 9},
-  {"source_env": "edge", "target_env": "ignored", "weight": 0}
+  {
+    "source_env": "prod",
+    "target_env": "dmz",
+    "weight": 6
+  },
+  {
+    "source_env": "prod",
+    "target_env": "core",
+    "weight": 5
+  },
+  {
+    "source_env": "PROD",
+    "target_env": "dmz",
+    "weight": 3
+  },
+  {
+    "source_env": "dmz",
+    "target_env": "vault",
+    "weight": 7
+  },
+  {
+    "source_env": "dmz",
+    "target_env": "edge",
+    "weight": 4
+  },
+  {
+    "source_env": "core",
+    "target_env": "vault",
+    "weight": 6
+  },
+  {
+    "source_env": "core",
+    "target_env": "mesh",
+    "weight": 5
+  },
+  {
+    "source_env": "edge",
+    "target_env": "vault",
+    "weight": 3
+  },
+  {
+    "source_env": "edge",
+    "target_env": "dns",
+    "weight": 4
+  },
+  {
+    "source_env": "vault",
+    "target_env": "zone",
+    "weight": 5
+  },
+  {
+    "source_env": "mesh",
+    "target_env": "zone",
+    "weight": 4
+  },
+  {
+    "source_env": "dns",
+    "target_env": "zone",
+    "weight": 6
+  },
+  {
+    "source_env": "core",
+    "target_env": "dns",
+    "weight": 3
+  },
+  {
+    "source_env": "prod",
+    "target_env": "edge",
+    "weight": 2
+  },
+  {
+    "source_env": "zone",
+    "target_env": "mesh",
+    "weight": 3
+  },
+  {
+    "source_env": "vault",
+    "target_env": "vault",
+    "weight": 9
+  },
+  {
+    "source_env": "edge",
+    "target_env": "ignored",
+    "weight": 0
+  }
 ]

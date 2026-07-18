@@ -1,200 +1,371 @@
 [
   {
-    "alert_id": "c01",
+    "alert_id": "p1001",
     "start_ms": 2010137001000,
-    "end_ms": 2010137001300,
+    "end_ms": 2010137001620,
     "severity": "p1",
     "env": "prod",
+    "signature": "ocsp staple stale",
+    "muted": false
+  },
+  {
+    "alert_id": "p1002",
+    "start_ms": 2010137001650,
+    "end_ms": 2010137001850,
+    "severity": "p2",
+    "env": "PROD",
+    "signature": "san mismatch on renewal",
+    "muted": false
+  },
+  {
+    "alert_id": "p1003",
+    "start_ms": 2010137002200,
+    "end_ms": 2010137002760,
+    "severity": "p2",
+    "env": "Prod ",
+    "signature": "key rollover incomplete",
+    "muted": false
+  },
+  {
+    "alert_id": "p1004",
+    "start_ms": 2010137003400,
+    "end_ms": 2010137004100,
+    "severity": "p1",
+    "env": "prod",
+    "signature": "chain order invalid",
+    "muted": false
+  },
+  {
+    "alert_id": "p1005",
+    "start_ms": 2010137004130,
+    "end_ms": 2010137004290,
+    "severity": "p3",
+    "env": "PROD",
+    "signature": "root trust anchor drift",
+    "muted": false
+  },
+  {
+    "alert_id": "p1006",
+    "start_ms": 2010137005200,
+    "end_ms": 2010137005740,
+    "severity": "p1",
+    "env": "Prod ",
+    "signature": "csr signature mismatch",
+    "muted": false
+  },
+  {
+    "alert_id": "d1007",
+    "start_ms": 2010137201000,
+    "end_ms": 2010137201700,
+    "severity": "p1",
+    "env": "dmz",
+    "signature": "revocation list expiry",
+    "muted": false
+  },
+  {
+    "alert_id": "d1008",
+    "start_ms": 2010137202000,
+    "end_ms": 2010137202520,
+    "severity": "p2",
+    "env": "DMZ",
     "signature": "leaf cert expiry within threshold",
     "muted": false
   },
   {
-    "alert_id": "c02",
-    "start_ms": 2010137001200,
+    "alert_id": "d1009",
+    "start_ms": 2010137202550,
+    "end_ms": 2010137202730,
+    "severity": "p2",
+    "env": "Dmz ",
+    "signature": "intermediate ca rotation drift",
+    "muted": false
+  },
+  {
+    "alert_id": "d1010",
+    "start_ms": 2010137203200,
+    "end_ms": 2010137203840,
+    "severity": "p1",
+    "env": "dmz",
+    "signature": "ocsp staple stale",
+    "muted": false
+  },
+  {
+    "alert_id": "d1011",
+    "start_ms": 2010137204200,
+    "end_ms": 2010137204680,
+    "severity": "p2",
+    "env": "DMZ",
+    "signature": "san mismatch on renewal",
+    "muted": false
+  },
+  {
+    "alert_id": "e1012",
+    "start_ms": 2010137401000,
+    "end_ms": 2010137401560,
+    "severity": "p2",
+    "env": "edge",
+    "signature": "key rollover incomplete",
+    "muted": false
+  },
+  {
+    "alert_id": "e1013",
+    "start_ms": 2010137401590,
+    "end_ms": 2010137401830,
+    "severity": "p1",
+    "env": "EDGE ",
+    "signature": "chain order invalid",
+    "muted": false
+  },
+  {
+    "alert_id": "e1014",
+    "start_ms": 2010137402400,
+    "end_ms": 2010137403000,
+    "severity": "p1",
+    "env": "edge",
+    "signature": "root trust anchor drift",
+    "muted": false
+  },
+  {
+    "alert_id": "e1015",
+    "start_ms": 2010137403600,
+    "end_ms": 2010137404120,
+    "severity": "p2",
+    "env": "EDGE ",
+    "signature": "csr signature mismatch",
+    "muted": false
+  },
+  {
+    "alert_id": "v1016",
+    "start_ms": 2010137601000,
+    "end_ms": 2010137601760,
+    "severity": "p1",
+    "env": "vault",
+    "signature": "revocation list expiry",
+    "muted": false
+  },
+  {
+    "alert_id": "v1017",
+    "start_ms": 2010137601790,
+    "end_ms": 2010137602010,
+    "severity": "p2",
+    "env": "Vault ",
+    "signature": "leaf cert expiry within threshold",
+    "muted": false
+  },
+  {
+    "alert_id": "v1018",
+    "start_ms": 2010137602600,
+    "end_ms": 2010137603140,
+    "severity": "p2",
+    "env": "vault",
+    "signature": "intermediate ca rotation drift",
+    "muted": false
+  },
+  {
+    "alert_id": "v1019",
+    "start_ms": 2010137603800,
+    "end_ms": 2010137604420,
+    "severity": "p1",
+    "env": "Vault ",
+    "signature": "ocsp staple stale",
+    "muted": false
+  },
+  {
+    "alert_id": "c1020",
+    "start_ms": 2010137801000,
+    "end_ms": 2010137801600,
+    "severity": "p1",
+    "env": "core",
+    "signature": "san mismatch on renewal",
+    "muted": false
+  },
+  {
+    "alert_id": "c1021",
+    "start_ms": 2010137801900,
+    "end_ms": 2010137802460,
+    "severity": "p2",
+    "env": "CORE ",
+    "signature": "key rollover incomplete",
+    "muted": false
+  },
+  {
+    "alert_id": "c1022",
+    "start_ms": 2010137802800,
+    "end_ms": 2010137803320,
+    "severity": "p1",
+    "env": "core",
+    "signature": "chain order invalid",
+    "muted": false
+  },
+  {
+    "alert_id": "c1023",
+    "start_ms": 2010137803700,
+    "end_ms": 2010137804180,
+    "severity": "p2",
+    "env": "CORE ",
+    "signature": "root trust anchor drift",
+    "muted": false
+  },
+  {
+    "alert_id": "d1024",
+    "start_ms": 2010138001000,
+    "end_ms": 2010138001640,
+    "severity": "p1",
+    "env": "dns",
+    "signature": "csr signature mismatch",
+    "muted": false
+  },
+  {
+    "alert_id": "d1025",
+    "start_ms": 2010138002300,
+    "end_ms": 2010138003000,
+    "severity": "p2",
+    "env": "DNS ",
+    "signature": "revocation list expiry",
+    "muted": false
+  },
+  {
+    "alert_id": "d1026",
+    "start_ms": 2010138003030,
+    "end_ms": 2010138003230,
+    "severity": "p1",
+    "env": "dns",
+    "signature": "leaf cert expiry within threshold",
+    "muted": false
+  },
+  {
+    "alert_id": "d1027",
+    "start_ms": 2010138003900,
+    "end_ms": 2010138004460,
+    "severity": "p1",
+    "env": "DNS ",
+    "signature": "intermediate ca rotation drift",
+    "muted": false
+  },
+  {
+    "alert_id": "z1028",
+    "start_ms": 2010138201000,
+    "end_ms": 2010138201580,
+    "severity": "p2",
+    "env": "zone",
+    "signature": "ocsp staple stale",
+    "muted": false
+  },
+  {
+    "alert_id": "z1029",
+    "start_ms": 2010138202100,
+    "end_ms": 2010138202720,
+    "severity": "p1",
+    "env": "ZONE ",
+    "signature": "san mismatch on renewal",
+    "muted": false
+  },
+  {
+    "alert_id": "z1030",
+    "start_ms": 2010138203300,
+    "end_ms": 2010138203800,
+    "severity": "p2",
+    "env": "zone",
+    "signature": "key rollover incomplete",
+    "muted": false
+  },
+  {
+    "alert_id": "m1031",
+    "start_ms": 2010138401000,
+    "end_ms": 2010138401700,
+    "severity": "p1",
+    "env": "mesh",
+    "signature": "chain order invalid",
+    "muted": false
+  },
+  {
+    "alert_id": "m1032",
+    "start_ms": 2010138401730,
+    "end_ms": 2010138401990,
+    "severity": "p2",
+    "env": "MESH ",
+    "signature": "root trust anchor drift",
+    "muted": false
+  },
+  {
+    "alert_id": "m1033",
+    "start_ms": 2010138402400,
+    "end_ms": 2010138402940,
+    "severity": "p2",
+    "env": "mesh",
+    "signature": "csr signature mismatch",
+    "muted": false
+  },
+  {
+    "alert_id": "m1",
+    "start_ms": 2010137001500,
     "end_ms": 2010137001800,
-    "severity": "p3",
-    "env": "edge",
-    "signature": "chain missing intermediate",
-    "muted": false
-  },
-  {
-    "alert_id": "c02",
-    "start_ms": 2010137001200,
-    "end_ms": 2010137002200,
-    "severity": "P2",
-    "env": "edge",
-    "signature": " chain missing intermediate replay ",
-    "muted": false
-  },
-  {
-    "alert_id": "c03",
-    "start_ms": 2010137002400,
-    "end_ms": 2010137002600,
-    "severity": "p4",
-    "env": "prod",
-    "signature": "ocsp staple recovered",
-    "muted": false
-  },
-  {
-    "alert_id": "c04",
-    "start_ms": 2010137003000,
-    "end_ms": 2010137003300,
-    "severity": "p3",
-    "env": "edge",
-    "signature": "renewal agent late checkin",
-    "muted": false
-  },
-  {
-    "alert_id": "c05",
-    "start_ms": 2010137003400,
-    "end_ms": 2010137003900,
-    "severity": "p3",
-    "env": "dmz",
-    "signature": "manual analyst note",
-    "muted": false
-  },
-  {
-    "alert_id": "c06",
-    "start_ms": 2010137004500,
-    "end_ms": 2010137004900,
-    "severity": "p2",
-    "env": "prod",
-    "signature": "san mismatch on rotation",
-    "muted": false
-  },
-  {
-    "alert_id": "c07",
-    "start_ms": 2010137005000,
-    "end_ms": 2010137005600,
-    "severity": "P1",
-    "env": "dmz",
-    "signature": "gateway cert rollback",
-    "muted": false
-  },
-  {
-    "alert_id": "c08",
-    "start_ms": 2010137005400,
-    "end_ms": 2010137005800,
-    "severity": "P2",
-    "env": "edge",
-    "signature": "temporary rotation drift burst",
-    "muted": false
-  },
-  {
-    "alert_id": "c08",
-    "start_ms": 2010137005400,
-    "end_ms": 2010137005600,
-    "severity": "p3",
-    "env": "edge",
-    "signature": "recovered after re-issue",
-    "muted": false
-  },
-  {
-    "alert_id": "c09",
-    "start_ms": 2010137006200,
-    "end_ms": 2010137006800,
-    "severity": "p2",
-    "env": "dmz",
-    "signature": "duplicate csr replay",
-    "muted": false
-  },
-  {
-    "alert_id": "c10",
-    "start_ms": 2010137006800,
-    "end_ms": 2010137006900,
     "severity": "p1",
     "env": "prod",
-    "signature": "stale trust anchor map",
-    "muted": false
-  },
-  {
-    "alert_id": "c10",
-    "start_ms": 2010137006800,
-    "end_ms": 2010137007000,
-    "severity": "p1",
-    "env": "prod",
-    "signature": "stale trust anchor map replay",
-    "muted": false
-  },
-  {
-    "alert_id": "c11",
-    "start_ms": 2010137007300,
-    "end_ms": 2010137007350,
-    "severity": "p4",
-    "env": "prod",
-    "signature": "diagnostic trace",
-    "muted": false
-  },
-  {
-    "alert_id": "c12",
-    "start_ms": 2010137007800,
-    "end_ms": 2010137008400,
-    "severity": "p1",
-    "env": "edge",
-    "signature": "waived rehearsal alert",
+    "signature": "muted noise",
     "muted": true
   },
   {
-    "alert_id": "c13",
-    "start_ms": 2010137008600,
-    "end_ms": 2010137009200,
+    "alert_id": "m2",
+    "start_ms": 2010137200500,
+    "end_ms": 2010137200800,
     "severity": "p2",
     "env": "dmz",
-    "signature": "weak key length ratio",
-    "muted": false
-  },
-  {
-    "alert_id": "c14",
-    "start_ms": 2010137008800,
-    "end_ms": 2010137009000,
-    "severity": "p3",
-    "env": "edge",
-    "signature": "batch reissue complete",
-    "muted": false
-  },
-  {
-    "alert_id": "c15",
-    "start_ms": 2010137009000,
-    "end_ms": 2010137009800,
-    "severity": "p1",
-    "env": "dmz",
-    "signature": "terminal rotation rollback",
-    "muted": false
-  },
-  {
-    "alert_id": "c16",
-    "start_ms": 2010137009100,
-    "end_ms": 2010137009500,
-    "severity": "p2",
-    "env": "dmz",
-    "signature": "zzz candidate",
+    "signature": "muted noise",
     "muted": "yes"
   },
   {
-    "alert_id": "c16",
-    "start_ms": 2010137009100,
-    "end_ms": 2010137009500,
-    "severity": "p2",
-    "env": "dmz",
-    "signature": "aaa candidate",
+    "alert_id": "u1",
+    "start_ms": 2010137400500,
+    "end_ms": 2010137400900,
+    "severity": "sev9",
+    "env": "edge",
+    "signature": "unknown sev",
     "muted": false
   },
   {
-    "alert_id": "c17",
-    "start_ms": 2010137009200,
-    "end_ms": 2010137009300,
-    "severity": "p2",
-    "env": "prod",
-    "signature": "alpha signature",
+    "alert_id": "u2",
+    "start_ms": 2010137600500,
+    "end_ms": 2010137600900,
+    "severity": "P1",
+    "env": "vault",
+    "signature": "casing sev",
     "muted": false
   },
   {
-    "alert_id": "c17",
-    "start_ms": 2010137009200,
-    "end_ms": 2010137009300,
+    "alert_id": "D1",
+    "start_ms": 2010137800000,
+    "end_ms": 2010137800400,
     "severity": "p2",
-    "env": "prod",
-    "signature": "zeta signature",
+    "env": "core",
+    "signature": "dup a",
+    "muted": false
+  },
+  {
+    "alert_id": "D1",
+    "start_ms": 2010137800000,
+    "end_ms": 2010137800600,
+    "severity": "p2",
+    "env": "core",
+    "signature": "dup b",
+    "muted": false
+  },
+  {
+    "alert_id": "D2",
+    "start_ms": 2010137810000,
+    "end_ms": 2010137810500,
+    "severity": "p2",
+    "env": "dns",
+    "signature": "dup c",
+    "muted": false
+  },
+  {
+    "alert_id": "D2",
+    "start_ms": 2010137810000,
+    "end_ms": 2010137810500,
+    "severity": "p1",
+    "env": "dns",
+    "signature": "dup d",
     "muted": false
   }
 ]
