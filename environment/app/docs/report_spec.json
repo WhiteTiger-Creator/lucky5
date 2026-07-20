@@ -330,6 +330,499 @@
       ]
     },
     "rounding_warning": "Rounding direction is not uniform across the pipeline and is not inferable from any neighbouring divisor, including between the two halves of the same probe score. Each divisor's direction is fixed by its own entry; #CR-5364 records the map.",
-    "reversal_warning": "At least one stage has had the DIRECTION of a comparison reversed by a later entry, not merely its constants retuned. Check each stage's latest dated entry before assuming an earlier entry's ordering still holds."
+    "reversal_warning": "At least one stage has had the DIRECTION of a comparison reversed by a later entry, not merely its constants retuned. Check each stage's latest dated entry before assuming an earlier entry's ordering still holds.",
+    "by_output_field": {
+      "_note": "Field-level navigation. For each output field, the review entries that govern how its value is derived. This lists WHERE the rule is, never what it says: no formula, divisor, threshold or rounding direction appears here. Where several entries are listed, the latest dated one governs and the earlier ones give the history that led to it.",
+      "fields": {
+        "actionable_duration_ms": [
+          "#CR-5310",
+          "#CR-5313",
+          "#CR-5325",
+          "#CR-5330",
+          "#CR-5333",
+          "#CR-5358"
+        ],
+        "alert_count": [
+          "#CR-5304",
+          "#CR-5307",
+          "#CR-5314",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5370",
+          "#CR-5372"
+        ],
+        "canonical_alert_checksum": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5366"
+        ],
+        "canonical_alert_count": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5366"
+        ],
+        "carry_in_ms": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "carry_out_ms": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "defer_compaction_checksum": [
+          "#CR-5310"
+        ],
+        "defer_overlap_ms": [
+          "#CR-5310"
+        ],
+        "defer_pressure_score": [
+          "#CR-5310",
+          "#CR-5314",
+          "#CR-5320",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5328",
+          "#CR-5362",
+          "#CR-5372"
+        ],
+        "defer_segment_count": [
+          "#CR-5310",
+          "#CR-5313",
+          "#CR-5330",
+          "#CR-5333",
+          "#CR-5362"
+        ],
+        "dispatchable_duration_ms": [
+          "#CR-5308",
+          "#CR-5310",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5372"
+        ],
+        "duration_ms": [
+          "#CR-5304",
+          "#CR-5305",
+          "#CR-5307",
+          "#CR-5308",
+          "#CR-5310",
+          "#CR-5313",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5330",
+          "#CR-5333",
+          "#CR-5352",
+          "#CR-5358",
+          "#CR-5370",
+          "#CR-5372"
+        ],
+        "effective_duration_ms": [
+          "#CR-5305",
+          "#CR-5307"
+        ],
+        "end_ms": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5304",
+          "#CR-5307",
+          "#CR-5308",
+          "#CR-5310",
+          "#CR-5313",
+          "#CR-5366",
+          "#CR-5370"
+        ],
+        "env": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5304",
+          "#CR-5305",
+          "#CR-5307",
+          "#CR-5308",
+          "#CR-5310",
+          "#CR-5311",
+          "#CR-5313",
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5325",
+          "#CR-5328",
+          "#CR-5333",
+          "#CR-5366",
+          "#CR-5368",
+          "#CR-5370"
+        ],
+        "env_count": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5366"
+        ],
+        "freeze_compaction_checksum": [
+          "#CR-5305"
+        ],
+        "freeze_overlap_ms": [
+          "#CR-5305"
+        ],
+        "freeze_segment_count": [
+          "#CR-5305",
+          "#CR-5325",
+          "#CR-5330",
+          "#CR-5333"
+        ],
+        "idle_gap_ms": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "ledger_adjusted_actionable_ms": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5322",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368",
+          "#CR-5372"
+        ],
+        "ledger_checksum": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "ledger_pressure_score": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5320",
+          "#CR-5328",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "longest_window_ms": [
+          "#CR-5304",
+          "#CR-5370"
+        ],
+        "max_carry_out_ms": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "max_defer_pressure_score": [
+          "#CR-5310"
+        ],
+        "max_ledger_pressure_score": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "max_severity": [
+          "#CR-5304",
+          "#CR-5307",
+          "#CR-5308",
+          "#CR-5310",
+          "#CR-5311",
+          "#CR-5322",
+          "#CR-5323",
+          "#CR-5370",
+          "#CR-5372"
+        ],
+        "max_stability_index": [
+          "#CR-5311",
+          "#CR-5354",
+          "#CR-5362"
+        ],
+        "max_stability_pressure_score": [
+          "#CR-5311",
+          "#CR-5354",
+          "#CR-5362"
+        ],
+        "max_trust_exposure_score": [
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5320",
+          "#CR-5328"
+        ],
+        "max_volatility_index": [
+          "#CR-5311",
+          "#CR-5354",
+          "#CR-5362"
+        ],
+        "muted_excluded_count": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5366"
+        ],
+        "priority": [
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5328",
+          "#CR-5372"
+        ],
+        "queue_hash": [
+          "#CR-5322",
+          "#CR-5325"
+        ],
+        "queue_hash_checksum": [
+          "#CR-5322",
+          "#CR-5325"
+        ],
+        "queued_window_count": [
+          "#CR-5322",
+          "#CR-5325"
+        ],
+        "raw_alert_count": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5366"
+        ],
+        "reopen_compaction_checksum": [
+          "#CR-5307"
+        ],
+        "reopen_overlap_ms": [
+          "#CR-5307"
+        ],
+        "reopen_segment_count": [
+          "#CR-5307",
+          "#CR-5323",
+          "#CR-5372"
+        ],
+        "risk_adjusted_duration_ms": [
+          "#CR-5307",
+          "#CR-5308",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5352",
+          "#CR-5372"
+        ],
+        "rotation_compaction_checksum": [
+          "#CR-5308",
+          "#CR-5352"
+        ],
+        "rotation_overlap_ms": [
+          "#CR-5308",
+          "#CR-5352"
+        ],
+        "rotation_segment_count": [
+          "#CR-5308",
+          "#CR-5313",
+          "#CR-5323",
+          "#CR-5330",
+          "#CR-5333",
+          "#CR-5352",
+          "#CR-5354",
+          "#CR-5372"
+        ],
+        "severity_counts": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5366"
+        ],
+        "source_alert_ids": [
+          "#CR-5304",
+          "#CR-5370"
+        ],
+        "stability_index": [
+          "#CR-5311",
+          "#CR-5314",
+          "#CR-5320",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5328",
+          "#CR-5354",
+          "#CR-5362",
+          "#CR-5372"
+        ],
+        "stability_pressure_score": [
+          "#CR-5307",
+          "#CR-5308",
+          "#CR-5311",
+          "#CR-5354",
+          "#CR-5362"
+        ],
+        "start_ms": [
+          "#CR-5304",
+          "#CR-5313",
+          "#CR-5325",
+          "#CR-5370"
+        ],
+        "ticket_id": [
+          "#CR-5322",
+          "#CR-5325"
+        ],
+        "total_defer_overlap_ms": [
+          "#CR-5310"
+        ],
+        "total_defer_segment_count": [
+          "#CR-5310"
+        ],
+        "total_freeze_overlap_ms": [
+          "#CR-5305"
+        ],
+        "total_freeze_segment_count": [
+          "#CR-5305"
+        ],
+        "total_ledger_adjusted_actionable_ms": [
+          "#CR-5313",
+          "#CR-5314",
+          "#CR-5330",
+          "#CR-5331",
+          "#CR-5333",
+          "#CR-5356",
+          "#CR-5358",
+          "#CR-5360",
+          "#CR-5368"
+        ],
+        "total_reopen_overlap_ms": [
+          "#CR-5307"
+        ],
+        "total_reopen_segment_count": [
+          "#CR-5307"
+        ],
+        "total_rotation_overlap_ms": [
+          "#CR-5308",
+          "#CR-5352"
+        ],
+        "total_rotation_segment_count": [
+          "#CR-5308",
+          "#CR-5352"
+        ],
+        "trust_edge_checksum": [
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5320",
+          "#CR-5328"
+        ],
+        "trust_exposure_score": [
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5320",
+          "#CR-5323",
+          "#CR-5325",
+          "#CR-5328",
+          "#CR-5372"
+        ],
+        "trust_path_digest": [
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5320",
+          "#CR-5328"
+        ],
+        "trust_path_digest_checksum": [
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5320",
+          "#CR-5328"
+        ],
+        "trust_reachable_envs": [
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5320",
+          "#CR-5328"
+        ],
+        "trust_strongest_path": [
+          "#CR-5316",
+          "#CR-5317",
+          "#CR-5319",
+          "#CR-5320",
+          "#CR-5328"
+        ],
+        "unique_alert_ids": [
+          "#CR-5301",
+          "#CR-5302",
+          "#CR-5366"
+        ],
+        "volatility_index": [
+          "#CR-5308",
+          "#CR-5311",
+          "#CR-5314",
+          "#CR-5320",
+          "#CR-5325",
+          "#CR-5328",
+          "#CR-5354",
+          "#CR-5362"
+        ],
+        "window_digest": [
+          "#CR-5304",
+          "#CR-5370"
+        ],
+        "window_digest_checksum": [
+          "#CR-5304",
+          "#CR-5370"
+        ],
+        "total_unmuted_duration_ms": [
+          "#CR-5304",
+          "#CR-5370"
+        ],
+        "total_effective_duration_ms": [
+          "#CR-5305"
+        ],
+        "total_risk_adjusted_duration_ms": [
+          "#CR-5307"
+        ],
+        "total_dispatchable_duration_ms": [
+          "#CR-5308",
+          "#CR-5352"
+        ],
+        "total_actionable_duration_ms": [
+          "#CR-5310"
+        ]
+      },
+      "aggregate_note": "Each `total_*` duration is the sum over drift windows of the per-window field of the same name minus its `total_` prefix, so it is governed by whichever entry governs that per-window field. One is easy to misread and is called out in the contract: see `summary_json.total_unmuted_duration_ms_contract` for which quantity it sums.",
+      "constant_note": "`schema_version` is a fixed contract constant, not a derived value, and is not governed by any review entry. It is recorded in this contract."
+    }
   }
 }

@@ -1041,3 +1041,18 @@ def test_governing_entry_index_is_complete():
     assert governing, "no governing entries found -- parser drifted from the log format"
     missing = sorted(governing - listed - nonnorm)
     assert not missing, f"governing entries absent from governing_entry_index: {missing}"
+
+
+def test_by_output_field_index_covers_every_emitted_field(primary_outputs):
+    """Every emitted field is reachable from by_output_field, or explicitly excused.
+
+    The instruction points agents at this index, so a field missing from it is
+    effectively undiscoverable even when the log states its rule clearly.
+    """
+    _, summary, windows, queue = primary_outputs
+    block = [b for v in windows.values() for b in v][0]
+    emitted = set(summary) | set(block) | set(queue[0])
+    mapped = set(SPEC["governing_entry_index"]["by_output_field"]["fields"])
+    excused = {"schema_version"}
+    missing = sorted(emitted - mapped - excused)
+    assert not missing, f"emitted fields absent from by_output_field: {missing}"
