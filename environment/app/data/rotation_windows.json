@@ -2,20 +2,20 @@
   {
     "env": "prod",
     "severity_scope": "p1",
-    "start_ms": 2010137005291,
-    "end_ms": 2010137005382
+    "start_ms": 2010137003839,
+    "end_ms": 2010137003930
   },
   {
     "env": "dmz",
     "severity_scope": "p1",
-    "start_ms": 2010137201119,
-    "end_ms": 2010137201196
+    "start_ms": 2010137201336,
+    "end_ms": 2010137201413
   },
   {
     "env": "edge",
     "severity_scope": "p1",
-    "start_ms": 2010137402502,
-    "end_ms": 2010137402593
+    "start_ms": 2010137401405,
+    "end_ms": 2010137401496
   },
   {
     "env": "edge",
@@ -26,8 +26,8 @@
   {
     "env": "core",
     "severity_scope": "all",
-    "start_ms": 2010137801995,
-    "end_ms": 2010137802086
+    "start_ms": 2010137801276,
+    "end_ms": 2010137801367
   },
   {
     "env": "core",
@@ -38,8 +38,8 @@
   {
     "env": "zone",
     "severity_scope": "all",
-    "start_ms": 2010138201098,
-    "end_ms": 2010138201189
+    "start_ms": 2010138202400,
+    "end_ms": 2010138202491
   },
   {
     "env": "zone",

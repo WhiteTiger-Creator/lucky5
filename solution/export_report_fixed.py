@@ -18,6 +18,7 @@ SEVERITY_ORDER = ["p1", "p2", "p3", "p4"]
 SEVERITY_RANK = {name: len(SEVERITY_ORDER) - idx for idx, name in enumerate(SEVERITY_ORDER)}
 PRIORITY_ORDER = ["critical", "high", "medium"]
 PRIORITY_RANK = {name: len(PRIORITY_ORDER) - idx for idx, name in enumerate(PRIORITY_ORDER)}
+ENV_QUEUE_CAP = 3
 SUPPORTED_REOPEN_SCOPES = {"all", "p1", "p2"}
 SUPPORTED_ROTATION_SCOPES = {"all", "p1", "p2"}
 SUPPORTED_DEFER_SCOPES = {"all", "p1", "p2"}
@@ -429,7 +430,20 @@ def build_drift_windows(
             )
             compacted_rotation_segments = _compact_intervals(rotation_segments)
             rotation_overlap = sum(end - start for start, end in compacted_rotation_segments)
-            dispatchable_duration = max(risk_adjusted_duration - (-(-rotation_overlap // 3)), 0)
+            # #CR-5382: reopen takes precedence where the two layers cover the same
+            # milliseconds. Time already attenuated as reopen is not attenuated again
+            # as rotation, so the shared span is removed from the rotation overlap
+            # before it is divided. The reported reopen_overlap_ms is unaffected.
+            shared_reopen_rotation_ms = 0
+            for rot_start, rot_end in compacted_rotation_segments:
+                for rep_start, rep_end in compacted_reopen_segments:
+                    shared_reopen_rotation_ms += max(
+                        0, min(rot_end, rep_end) - max(rot_start, rep_start)
+                    )
+            rotation_overlap_used = max(rotation_overlap - shared_reopen_rotation_ms, 0)
+            dispatchable_duration = max(
+                risk_adjusted_duration - (-(-rotation_overlap_used // 3)), 0
+            )
             defer_all, defer_severity = _scope_intervals_for_window(
                 defer_map, env, window["max_severity"]
             )
@@ -691,7 +705,19 @@ def build_response_queue(
             row["start_ms"],
         )
     )
-    return queue
+    # #CR-5384: dispatch capacity cap, applied AFTER the global ordering above.
+    # At most ENV_QUEUE_CAP rows per environment survive, and which ones survive
+    # is decided by global rank -- not by any per-env ordering. Applying the cap
+    # before the sort, or re-sorting after it, yields a different queue.
+    capped: list[dict] = []
+    per_env_kept: dict[str, int] = {}
+    for row in queue:
+        kept = per_env_kept.get(row["env"], 0)
+        if kept >= ENV_QUEUE_CAP:
+            continue
+        per_env_kept[row["env"]] = kept + 1
+        capped.append(row)
+    return capped
 
 
 def build_summary(

@@ -210,9 +210,14 @@ def test_windows_schema_and_sorting(primary_outputs):
             assert row["risk_adjusted_duration_ms"] == max(
                 row["effective_duration_ms"] - (-(-row["reopen_overlap_ms"] // 2)), 0
             )
-            assert row["dispatchable_duration_ms"] == max(
+            # Under #CR-5382 the rotation subtraction uses the overlap MINUS the span
+            # shared with reopen, while rotation_overlap_ms reports the unadjusted
+            # value. So the reported overlap bounds the subtraction rather than
+            # fixing it: the exact values are pinned by the fixture comparison.
+            assert row["dispatchable_duration_ms"] >= max(
                 row["risk_adjusted_duration_ms"] - (-(-row["rotation_overlap_ms"] // 3)), 0
             )
+            assert row["dispatchable_duration_ms"] <= row["risk_adjusted_duration_ms"]
             assert row["actionable_duration_ms"] == max(
                 row["dispatchable_duration_ms"] - (-(-row["defer_overlap_ms"] // 4)), 0
             )
@@ -855,8 +860,11 @@ def test_p2_windows_borrow_p1_scope_when_p2_scope_missing(tmp_path: Path):
         assert window["rotation_overlap_ms"] == 100
         assert window["defer_overlap_ms"] == 100
         assert window["risk_adjusted_duration_ms"] == 250
-        assert window["dispatchable_duration_ms"] == 216
-        assert window["actionable_duration_ms"] == 191
+        # Reopen and rotation both cover 150-250 here, so under #CR-5382 the whole
+        # rotation span is already attenuated as reopen and the rotation subtraction
+        # is zero -- while rotation_overlap_ms above still reports the full 100.
+        assert window["dispatchable_duration_ms"] == 250
+        assert window["actionable_duration_ms"] == 225
         assert summary["queued_window_count"] == 0
         assert queue == []
     finally:
@@ -1056,3 +1064,62 @@ def test_by_output_field_index_covers_every_emitted_field(primary_outputs):
     excused = {"schema_version"}
     missing = sorted(emitted - mapped - excused)
     assert not missing, f"emitted fields absent from by_output_field: {missing}"
+
+
+def test_reopen_rotation_precedence_is_live_in_the_shipped_data():
+    """#CR-5382 must actually bind: the two layers overlap somewhere in the inputs.
+
+    A precedence rule that no input exercises is documented but dormant, so it
+    contributes nothing and silently stops being verified. This pins the data.
+    """
+    reopen = json.loads(Path("/app/data/reopen_windows.json").read_text(encoding="utf-8"))
+    rotation = json.loads(Path("/app/data/rotation_windows.json").read_text(encoding="utf-8"))
+    shared = 0
+    for rot in rotation:
+        for rep in reopen:
+            if rot["env"] != rep["env"]:
+                continue
+            shared += max(0, min(rot["end_ms"], rep["end_ms"]) - max(rot["start_ms"], rep["start_ms"]))
+    assert shared > 0, "no reopen/rotation overlap in the inputs -- #CR-5382 is dormant"
+
+
+def test_rotation_overlap_is_reported_unadjusted(primary_outputs):
+    """#CR-5382 changes the subtraction only; rotation_overlap_ms stays unadjusted."""
+    _, summary, windows, _ = primary_outputs
+    blocks = [b for v in windows.values() for b in v]
+    assert summary["total_rotation_overlap_ms"] == sum(b["rotation_overlap_ms"] for b in blocks)
+    # Recompute the unadjusted compacted overlap straight from the inputs, so this
+    # cannot pass on a reported value that was silently reduced by the precedence.
+    rotation = json.loads(Path("/app/data/rotation_windows.json").read_text(encoding="utf-8"))
+    independent = 0
+    for env, blocks_for_env in windows.items():
+        for block in blocks_for_env:
+            spans = [
+                (max(block["start_ms"], r["start_ms"]), min(block["end_ms"], r["end_ms"]))
+                for r in rotation
+                if r["env"] == env and r["severity_scope"] in ("all", block["max_severity"])
+            ]
+            spans = [(s, e) for s, e in spans if e > s]
+            spans.sort()
+            merged: list[list[int]] = []
+            for s, e in spans:
+                if merged and s <= merged[-1][1]:
+                    merged[-1][1] = max(merged[-1][1], e)
+                else:
+                    merged.append([s, e])
+            independent += sum(e - s for s, e in merged)
+    assert summary["total_rotation_overlap_ms"] == independent, (
+        "reported rotation overlap was adjusted by the precedence rule; "
+        "#CR-5382 requires it to stay unadjusted"
+    )
+
+
+def test_env_queue_cap_applied_after_ordering(primary_outputs):
+    """#CR-5384: at most three rows per env, retained by the GLOBAL order."""
+    _, _, _, queue = primary_outputs
+    per_env = {}
+    for row in queue:
+        per_env[row["env"]] = per_env.get(row["env"], 0) + 1
+    assert per_env, "queue is empty"
+    assert max(per_env.values()) <= 3, f"env exceeded the cap: {per_env}"
+    assert any(v == 3 for v in per_env.values()), "cap never binds -- it is dormant"
