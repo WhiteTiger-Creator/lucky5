@@ -128,10 +128,11 @@ def canonicalize_alerts(rows: list[dict]) -> list[dict]:
             continue
         if candidate["end_ms"] < existing["end_ms"]:
             continue
-        if _severity_rank(candidate["severity"]) > _severity_rank(existing["severity"]):
+        # #CR-5366 reverses this step: the LOWER severity rank wins a duplicate tie.
+        if _severity_rank(candidate["severity"]) < _severity_rank(existing["severity"]):
             deduped[alert_id] = candidate
             continue
-        if _severity_rank(candidate["severity"]) < _severity_rank(existing["severity"]):
+        if _severity_rank(candidate["severity"]) > _severity_rank(existing["severity"]):
             continue
         if len(candidate["signature"]) > len(existing["signature"]):
             deduped[alert_id] = candidate
@@ -369,7 +370,7 @@ def build_drift_windows(
                     "max_severity": row["severity"],
                 }
                 continue
-            if row["start_ms"] <= current["end_ms"] + 45:
+            if row["start_ms"] <= current["end_ms"] + 100:  # stitch gap per #CR-5370
                 current["end_ms"] = max(current["end_ms"], row["end_ms"])
                 current["source_alert_ids"].append(row["alert_id"])
                 if _severity_rank(row["severity"]) > _severity_rank(current["max_severity"]):
@@ -428,7 +429,7 @@ def build_drift_windows(
             )
             compacted_rotation_segments = _compact_intervals(rotation_segments)
             rotation_overlap = sum(end - start for start, end in compacted_rotation_segments)
-            dispatchable_duration = max(risk_adjusted_duration - (rotation_overlap // 3), 0)
+            dispatchable_duration = max(risk_adjusted_duration - (-(-rotation_overlap // 3)), 0)
             defer_all, defer_severity = _scope_intervals_for_window(
                 defer_map, env, window["max_severity"]
             )
@@ -478,9 +479,9 @@ def build_drift_windows(
                 if previous_end_ms is None
                 else max(window["start_ms"] - previous_end_ms, 0)
             )
-            carry_in_ms = max(previous_carry_out_ms - (idle_gap_ms // 2), 0)
+            carry_in_ms = max(previous_carry_out_ms - (-(-idle_gap_ms // 2)), 0)
             ledger_adjusted_actionable_ms = (
-                window["actionable_duration_ms"] + (carry_in_ms // 4)
+                window["actionable_duration_ms"] + (-(-carry_in_ms // 4))
             )
             carry_out_ms = min(
                 carry_in_ms
@@ -488,7 +489,7 @@ def build_drift_windows(
                 + (window["freeze_segment_count"] * 8)
                 + (window["rotation_segment_count"] * 15)
                 + (window["defer_segment_count"] * 10),
-                2000,
+                821,   # carry-out cap per #CR-5368
             )
             window["idle_gap_ms"] = idle_gap_ms
             window["carry_in_ms"] = carry_in_ms
@@ -553,7 +554,7 @@ def build_response_queue(
             volatility_index = (
                 stability_pressure_score
                 + (all_rotation_probe_ms // 24)
-                + (severity_rotation_probe_ms // 16)
+                + (-(-severity_rotation_probe_ms // 16))
                 + (window["rotation_segment_count"] * 2)
             )
             defer_all, defer_severity = _scope_intervals_for_window(
@@ -568,13 +569,13 @@ def build_response_queue(
                 lookback_ms=300,
             )
             defer_pressure_score = (
-                (all_defer_probe_ms // 40)
+                (-(-all_defer_probe_ms // 40))
                 + (severity_defer_probe_ms // 28)
                 + window["defer_segment_count"]
             )
             ledger_pressure_score = (
                 (window["carry_out_ms"] // 60)
-                + (window["carry_in_ms"] // 120)
+                + (-(-window["carry_in_ms"] // 120))
                 + max(window["alert_count"] - 1, 0)
             )
             stability_index = (
@@ -585,15 +586,15 @@ def build_response_queue(
             )
             if (
                 window["max_severity"] == "p1"
-                and window["ledger_adjusted_actionable_ms"] >= 235
+                and window["ledger_adjusted_actionable_ms"] >= 454
             ) or (
-                window["ledger_adjusted_actionable_ms"] >= 500
-                or stability_index >= 20
-                or window["trust_exposure_score"] >= 24
+                window["ledger_adjusted_actionable_ms"] >= 551
+                or stability_index >= 29
+                or window["trust_exposure_score"] >= 35
             ):
                 priority = "critical"
-            elif window["ledger_adjusted_actionable_ms"] >= 265 or (
-                window["alert_count"] >= 3 and window["max_severity"] in {"p1", "p2"}
+            elif window["ledger_adjusted_actionable_ms"] >= 400 or (
+                window["alert_count"] >= 2 and window["max_severity"] in {"p1", "p2"}
             ) or (
                 window["rotation_segment_count"] == 0
                 and window["risk_adjusted_duration_ms"] >= 340

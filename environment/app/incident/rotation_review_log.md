@@ -505,6 +505,8 @@ Shift lead logged a routine rotation observation for edge (central) during revie
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
 > **Governance decision (2026-05-02 - #CR-5301)** Yusuf: canonicalization: env — normalize env via str(...).strip().lower(); severity — normalize severity via str(...).strip().lower(), then if the normalized value is not one of p1, p2, p3, p4 it falls back to p4 (unrecognized severities are treated as p4, the lowest tier); signature — collapse internal whitespace for signature; end_ms — coerce end_ms to int after trim; invalid -> 0, and the row is KEPT, not dropped (supersedes #CR-4812); muted — booleans unchanged; strings true/1/yes => true, all other strings => false; non-string/non-bool use Python bool(value).
 
+> **Governance decision (2026-05-21 - #CR-5366)** Yusuf: duplicate-severity precedence is REVERSED. Certificate-rotation duplicates are mostly re-emissions from the rotation watchdog, which escalates a repeated alert before an operator confirms it, so keeping the highest severity was over-escalating the queue. Where two rows share an `alert_id` and tie on `end_ms`, the row with the LOWER severity rank is kept: p4 beats p3, p3 beats p2, p2 beats p1. Only this comparison changes; the rest of the chain runs unchanged after it — then longer normalized signature, then lexicographically larger normalized env, then first seen in input order.
+
 ### Review entry 0116 — core lane
 Shift lead logged a routine rotation observation for core (east) during review window 0116. Noise review: repeated drift alerts traced to a flapping policy probe, muted at the source.
 Historical CSV exports remain archived and non-authoritative for the JSON reconciler acceptance.
@@ -674,6 +676,8 @@ Historical CSV exports remain archived and non-authoritative for the JSON reconc
 Shift lead logged a routine rotation observation for dmz (west) during review window 0157. Quarterly access recertification touched this lane; no compile-relevant configuration changed.
 Reviewers should reconcile behavior questions against #CR governance decisions rather than chat excerpts.
 > **Governance decision (2026-05-03 - #CR-5304)** Lena: drift windows group by normalized env; merge condition: next.start_ms <= current.end_ms + 45. Muted alerts are excluded from window construction. This supersedes #CR-4819 and revises the +30 stitch in #CR-5211.
+
+> **Governance decision (2026-05-21 - #CR-5370)** Lena: drift-window stitch threshold retuned to 100 ms. Rotation drift re-emerges further apart than the original 45 ms allowance assumed, splitting one incident across windows. The merge condition becomes `next.start_ms <= current.end_ms + 100`, inclusive, so a gap of exactly 100 ms merges and 101 does not. Grouping by normalized env and the exclusion of muted alerts are unchanged.
 
 ### Review entry 0158 — vault lane
 Shift lead logged a routine rotation observation for vault (north) during review window 0158. Vendor ticket on renewal-callback retries closed; delivery within contractual budget.
@@ -1184,6 +1188,22 @@ No reconciler semantics changed in this entry; parameters remain as approved by 
 Shift lead logged a routine rotation observation for edge (central) during review window 0283. certificate chain trust edge audit sampled cross-account roles; no reconciler-relevant findings for this lane.
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
 > **Governance decision (2026-05-06 - #CR-5313)** Yusuf: risk ledger: state is independent per normalized env; process each env's merged windows in start_ms ascending order after all four attenuation layers are complete. First window: idle_gap_ms=0, carry_in_ms=0. idle_gap_ms: for later windows max(current.start_ms-previous.end_ms,0). carry_in_ms = max(previous.carry_out_ms-(idle_gap_ms//2),0). ledger_adjusted_actionable_ms = actionable_duration_ms+(carry_in_ms//4). carry_out_ms = min(carry_in_ms+actionable_duration_ms+(rotation_segment_count*15)+(defer_segment_count*10),2000). finalize carry_out_ms for one window before evaluating the next window in the same env. The //2 idle decay and the 2000 cap are final and revise #CR-5224. This supersedes #CR-4835.
+
+> **Governance decision (2026-05-21 - #CR-5368)** Yusuf: risk-ledger carry-out cap retuned. The 2000 ms cap never bound, letting one env accumulate carry without limit across a rotation shift. The cap is now 821 ms, applied after the computed value, so a window whose computed carry is exactly 821 is unaffected and one above it clamps down to 821. The decay, carry-in and credit rules are unchanged.
+
+> **Governance decision (2026-05-19 - #CR-5352)** Rosa: rotation attenuation — the rotation overlap subtracted from the risk-adjusted duration is quartered no longer: it is DIVIDED BY THREE AND ROUNDED UP, `risk_adjusted_duration_ms - ceil(rotation_overlap_ms / 3)`, because a scoped rotation shorter than one full step was being absorbed at no cost. The freeze layer above it and the defer layer below it keep their own directions. In integer arithmetic ceil(x/n) is -(-x // n).
+
+> **Governance decision (2026-05-19 - #CR-5354)** Rosa: severity rotation probe — the severity-scoped half of the rotation probe ROUNDS UP: `volatility_index = stability_pressure_score + (all_rotation_probe_ms // 24) + ceil(severity_rotation_probe_ms / 16) + rotation_segment_count*2`. The all-scoped half stays floored. In integer arithmetic ceil(x/n) is -(-x // n).
+
+> **Governance decision (2026-05-19 - #CR-5356)** Rosa: carry-in pressure half — the carry-in half of the ledger pressure score ROUNDS UP while the carry-out half does not: `ledger_pressure_score = (carry_out_ms // 80) + ceil(carry_in_ms / 120) + max(alert_count-1, 0)`. In integer arithmetic ceil(x/n) is -(-x // n).
+
+> **Governance decision (2026-05-19 - #CR-5358)** Rosa: ledger credit — the carry credit applied to the actionable duration ROUNDS UP: `ledger_adjusted_actionable_ms = actionable_duration_ms + ceil(carry_in_ms / 4)`, so a carry smaller than one full step still credits a millisecond. In integer arithmetic ceil(x/n) is -(-x // n).
+
+> **Governance decision (2026-05-19 - #CR-5360)** Rosa: idle decay — the idle-gap decay applied to the incoming carry ROUNDS UP: `carry_in_ms = max(previous_carry_out_ms - ceil(idle_gap_ms / 2), 0)`. Note this is the decay, not the credit: rounding it up decays MORE, not less. In integer arithmetic ceil(x/n) is -(-x // n).
+
+> **Governance decision (2026-05-19 - #CR-5362)** Rosa: all-scope defer probe — the all-scoped half of the defer probe ROUNDS UP: `defer_pressure_score = ceil(all_defer_probe_ms / 40) + (severity_defer_probe_ms // 28) + defer_segment_count`. Here it is the ALL-scoped half that rounds up and the severity-scoped half that stays floored — the opposite arrangement to the rotation probe in #CR-5354, and the two must not be assumed symmetric. In integer arithmetic ceil(x/n) is -(-x // n).
+
+> **Governance decision (2026-05-20 - #CR-5364)** Rosa: recording the rounding map settled across #CR-5307, #CR-5310, #CR-5352, #CR-5354, #CR-5356, #CR-5358, #CR-5360 and #CR-5362 for the avoidance of doubt. Rounding in this reconciler is NOT uniform and no divisor's direction may be inferred from any other, including between the two halves of the same probe score. Each divisor's direction is fixed by its own governing decision.
 
 ### Review entry 0284 — core lane
 Shift lead logged a routine rotation observation for core (east) during review window 0284. Synthetic drift injection verified alert delivery to the containment rotation for this region.
@@ -1780,6 +1800,8 @@ Reviewers should reconcile behavior questions against #CR governance decisions r
 Shift lead logged a routine rotation observation for vault (north) during review window 0430. Certificate chain validation drill completed; drift alert acknowledgment stayed within the governance SLO.
 No reconciler semantics changed in this entry; parameters remain as approved by the governance board.
 > **Governance decision (2026-05-09 - #CR-5323)** Marek: priority rules: critical — max_severity == p1 and ledger_adjusted_actionable_ms >= 235, or ledger_adjusted_actionable_ms >= 500, or stability_index >= 20, or trust_exposure_score >= 24. high — ledger_adjusted_actionable_ms >= 265, or alert_count >= 3 with max_severity in {p1,p2}, or rotation_segment_count == 0 with risk_adjusted_duration_ms >= 340, or defer_pressure_score > 0 with dispatchable_duration_ms >= 320, or reopen_segment_count == 0 with duration_ms >= 420, or trust_exposure_score >= 12. Otherwise otherwise.
+
+> **Governance decision (2026-05-22 - #CR-5372)** Marek: priority thresholds retuned. The critical cutoffs were absorbing nearly the whole queue, so the high tier never applied. Critical now requires: max_severity == p1 with ledger_adjusted_actionable_ms >= 454; or ledger_adjusted_actionable_ms >= 551; or stability_index >= 29; or trust_exposure_score >= 35. High, evaluated only when critical does not hold, requires: ledger_adjusted_actionable_ms >= 400; or alert_count >= 2 with max_severity in {p1, p2}; or rotation_segment_count == 0 with risk_adjusted_duration_ms >= 340; or defer_pressure_score > 0 with dispatchable_duration_ms >= 320; or reopen_segment_count == 0 with duration_ms >= 420; or trust_exposure_score >= 12. Otherwise medium. The clause structure and evaluation order are unchanged.
 
 ### Review entry 0431 — fabric lane
 Shift lead logged a routine rotation observation for fabric (central) during review window 0431. Dashboard tiles for drift volume lagged during rule refresh; attributed to cache staleness, not the reconciler.

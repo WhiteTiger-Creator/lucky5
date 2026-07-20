@@ -263,5 +263,67 @@
   "semantics_source": {
     "notes": "This document is the output contract only: file paths, schemas, required fields, repair tokens, digest payloads and checksum serialization. It does NOT define how values are derived.",
     "authority": "Canonicalization, dedupe tie-breaks, window merging, the freeze/reopen/rotation/defer attenuation layers and their scope rules, probe scoring, the risk ledger, certificate chain trust traversal, queue admission, priority rules and queue ordering were settled by the rotation governance board; the authoritative record is /app/incident/rotation_review_log.md. Where an early draft proposal conflicts with a later governance decision, the later decision wins."
+  },
+  "governing_entry_index": {
+    "_note": "Navigation aid only. It records WHICH review entries carry the governing rule for each pipeline stage; it does not restate any rule, value, divisor, threshold or rounding direction. Entries not listed are superseded by a later dated entry or carry no reconciler semantics.",
+    "stages": {
+      "canonicalization": [
+        "#CR-5301"
+      ],
+      "deduplication": [
+        "#CR-5302",
+        "#CR-5366"
+      ],
+      "window_construction": [
+        "#CR-5304",
+        "#CR-5370"
+      ],
+      "freeze_layer": [
+        "#CR-5305"
+      ],
+      "reopen_layer": [
+        "#CR-5307"
+      ],
+      "rotation_layer": [
+        "#CR-5308",
+        "#CR-5352"
+      ],
+      "defer_layer": [
+        "#CR-5310"
+      ],
+      "probe_scoring": [
+        "#CR-5311",
+        "#CR-5354",
+        "#CR-5362"
+      ],
+      "risk_ledger": [
+        "#CR-5313",
+        "#CR-5356",
+        "#CR-5358",
+        "#CR-5360",
+        "#CR-5368"
+      ],
+      "trust_graph": [
+        "#CR-5316",
+        "#CR-5317",
+        "#CR-5319",
+        "#CR-5320"
+      ],
+      "queue_admission": [
+        "#CR-5322"
+      ],
+      "priority_assignment": [
+        "#CR-5323",
+        "#CR-5372"
+      ],
+      "queue_ordering": [
+        "#CR-5325"
+      ],
+      "rounding_map": [
+        "#CR-5364"
+      ]
+    },
+    "rounding_warning": "Rounding direction is not uniform across the pipeline and is not inferable from any neighbouring divisor, including between the two halves of the same probe score. Each divisor's direction is fixed by its own entry; #CR-5364 records the map.",
+    "reversal_warning": "At least one stage has had the DIRECTION of a comparison reversed by a later entry, not merely its constants retuned. Check each stage's latest dated entry before assuming an earlier entry's ordering still holds."
   }
 }

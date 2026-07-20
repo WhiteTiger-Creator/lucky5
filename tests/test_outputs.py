@@ -211,13 +211,13 @@ def test_windows_schema_and_sorting(primary_outputs):
                 row["effective_duration_ms"] - (-(-row["reopen_overlap_ms"] // 2)), 0
             )
             assert row["dispatchable_duration_ms"] == max(
-                row["risk_adjusted_duration_ms"] - (row["rotation_overlap_ms"] // 3), 0
+                row["risk_adjusted_duration_ms"] - (-(-row["rotation_overlap_ms"] // 3)), 0
             )
             assert row["actionable_duration_ms"] == max(
                 row["dispatchable_duration_ms"] - (-(-row["defer_overlap_ms"] // 4)), 0
             )
             assert row["ledger_adjusted_actionable_ms"] == (
-                row["actionable_duration_ms"] + (row["carry_in_ms"] // 4)
+                row["actionable_duration_ms"] + (-(-row["carry_in_ms"] // 4))
             )
             assert row["source_alert_ids"] == sorted(row["source_alert_ids"])
             assert row["trust_reachable_envs"] == sorted(row["trust_reachable_envs"])
@@ -278,15 +278,15 @@ def test_priority_rules(primary_outputs):
     for row in queue:
         if (
             row["max_severity"] == "p1"
-            and row["ledger_adjusted_actionable_ms"] >= 235
+            and row["ledger_adjusted_actionable_ms"] >= 454
         ) or (
-            row["ledger_adjusted_actionable_ms"] >= 500
-            or row["stability_index"] >= 20
-            or row["trust_exposure_score"] >= 24
+            row["ledger_adjusted_actionable_ms"] >= 551
+            or row["stability_index"] >= 29
+            or row["trust_exposure_score"] >= 35
         ):
             assert row["priority"] == "critical"
-        elif row["ledger_adjusted_actionable_ms"] >= 265 or (
-            row["alert_count"] >= 3 and row["max_severity"] in {"p1", "p2"}
+        elif row["ledger_adjusted_actionable_ms"] >= 400 or (
+            row["alert_count"] >= 2 and row["max_severity"] in {"p1", "p2"}
         ) or (
             row["rotation_segment_count"] == 0
             and row["risk_adjusted_duration_ms"] >= 340
@@ -662,8 +662,8 @@ def test_reopen_compaction_and_scope_are_used(tmp_path: Path):
             },
             {
                 "alert_id": "r2",
-                "start_ms": 500,
-                "end_ms": 800,
+                "start_ms": 520,
+                "end_ms": 820,
                 "severity": "p2",
                 "env": "lab",
                 "signature": "beta",
@@ -684,7 +684,7 @@ def test_reopen_compaction_and_scope_are_used(tmp_path: Path):
         assert summary["reopen_compaction_checksum"] == hashlib.sha256(
             "lab|all|150|240\nlab|p1|260|320".encode("utf-8")
         ).hexdigest()
-        assert [row["ticket_id"] for row in queue] == ["lab:500-800", "lab:100-400"]
+        assert [row["ticket_id"] for row in queue] == ["lab:520-820", "lab:100-400"]
     finally:
         REOPEN_PATH.write_text(original_reopen, encoding="utf-8")
 
@@ -712,8 +712,8 @@ def test_rotation_compaction_and_scope_are_used(tmp_path: Path):
             },
             {
                 "alert_id": "z2",
-                "start_ms": 500,
-                "end_ms": 820,
+                "start_ms": 520,
+                "end_ms": 840,
                 "severity": "p2",
                 "env": "lab",
                 "signature": "beta",
@@ -728,7 +728,7 @@ def test_rotation_compaction_and_scope_are_used(tmp_path: Path):
         assert first["rotation_overlap_ms"] == 160
         assert first["rotation_segment_count"] == 2
         assert first["dispatchable_duration_ms"] == max(
-            first["risk_adjusted_duration_ms"] - (160 // 3), 0
+            first["risk_adjusted_duration_ms"] - (-(-160 // 3)), 0
         )
         assert second["rotation_overlap_ms"] == 0
         assert summary["total_rotation_overlap_ms"] == 160
@@ -736,7 +736,7 @@ def test_rotation_compaction_and_scope_are_used(tmp_path: Path):
         assert summary["rotation_compaction_checksum"] == hashlib.sha256(
             "lab|all|130|240\nlab|p1|260|310".encode("utf-8")
         ).hexdigest()
-        assert [row["ticket_id"] for row in queue] == ["lab:100-400", "lab:500-820"]
+        assert [row["ticket_id"] for row in queue] == ["lab:520-840", "lab:100-400"]
     finally:
         ROTATION_PATH.write_text(original_rotation, encoding="utf-8")
 
@@ -764,8 +764,8 @@ def test_defer_compaction_and_scope_are_used(tmp_path: Path):
             },
             {
                 "alert_id": "q2",
-                "start_ms": 500,
-                "end_ms": 860,
+                "start_ms": 540,
+                "end_ms": 900,
                 "severity": "p2",
                 "env": "lab",
                 "signature": "beta",
@@ -788,7 +788,7 @@ def test_defer_compaction_and_scope_are_used(tmp_path: Path):
         assert summary["defer_compaction_checksum"] == hashlib.sha256(
             "lab|all|110|250\nlab|p1|255|325".encode("utf-8")
         ).hexdigest()
-        assert [row["ticket_id"] for row in queue] == ["lab:100-420", "lab:500-860"]
+        assert [row["ticket_id"] for row in queue] == ["lab:540-900", "lab:100-420"]
     finally:
         DEFER_PATH.write_text(original_defer, encoding="utf-8")
 
@@ -855,8 +855,8 @@ def test_p2_windows_borrow_p1_scope_when_p2_scope_missing(tmp_path: Path):
         assert window["rotation_overlap_ms"] == 100
         assert window["defer_overlap_ms"] == 100
         assert window["risk_adjusted_duration_ms"] == 250
-        assert window["dispatchable_duration_ms"] == 217
-        assert window["actionable_duration_ms"] == 192
+        assert window["dispatchable_duration_ms"] == 216
+        assert window["actionable_duration_ms"] == 191
         assert summary["queued_window_count"] == 0
         assert queue == []
     finally:
@@ -970,7 +970,7 @@ def test_stateful_risk_ledger_propagates_and_decays_between_windows(tmp_path: Pa
         assert summary["max_carry_out_ms"] == 450
         assert len(summary["ledger_checksum"]) == 64
         second_queue = next(row for row in queue if row["ticket_id"] == "lab:600-850")
-        assert second_queue["ledger_pressure_score"] == (450 // 60) + (200 // 120)
+        assert second_queue["ledger_pressure_score"] == (450 // 60) + (-(-200 // 120))
     finally:
         for path, content in originals.items():
             path.write_text(content, encoding="utf-8")
