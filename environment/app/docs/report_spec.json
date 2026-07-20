@@ -258,7 +258,8 @@
       "source_alert_ids",
       "max_severity"
     ],
-    "field_policy": "Each window row carries EXACTLY the required_fields keys \u2014 no extras and no omissions. Queue-level fields (ticket_id, priority, queue_hash, window_digest, stability_pressure_score, volatility_index, defer_pressure_score, ledger_pressure_score, stability_index) belong only to response_queue.jsonl rows. env is the top-level map key, not a row field."
+    "field_policy": "Each window row carries EXACTLY the required_fields keys \u2014 no extras and no omissions. Queue-level fields (ticket_id, priority, queue_hash, window_digest, stability_pressure_score, volatility_index, defer_pressure_score, ledger_pressure_score, stability_index) belong only to response_queue.jsonl rows. env is the top-level map key, not a row field.",
+    "source_alert_ids_order": "`source_alert_ids` is a JSON array of the canonical alert_id strings that formed the window, sorted ASCENDING by string comparison. This ordering applies in both drift_windows.json and response_queue.jsonl. The comma-joined form used inside signature and checksum payloads is built from that same ascending order."
   },
   "semantics_source": {
     "notes": "This document is the output contract only: file paths, schemas, required fields, repair tokens, digest payloads and checksum serialization. It does NOT define how values are derived.",
@@ -298,6 +299,10 @@
       ],
       "risk_ledger": [
         "#CR-5313",
+        "#CR-5314",
+        "#CR-5330",
+        "#CR-5331",
+        "#CR-5333",
         "#CR-5356",
         "#CR-5358",
         "#CR-5360",
@@ -307,7 +312,8 @@
         "#CR-5316",
         "#CR-5317",
         "#CR-5319",
-        "#CR-5320"
+        "#CR-5320",
+        "#CR-5328"
       ],
       "queue_admission": [
         "#CR-5322"

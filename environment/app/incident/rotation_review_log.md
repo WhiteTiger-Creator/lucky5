@@ -1195,7 +1195,7 @@ Thread archived; see the #CR decision entries for anything affecting reconciler 
 
 > **Governance decision (2026-05-19 - #CR-5354)** Rosa: severity rotation probe — the severity-scoped half of the rotation probe ROUNDS UP: `volatility_index = stability_pressure_score + (all_rotation_probe_ms // 24) + ceil(severity_rotation_probe_ms / 16) + rotation_segment_count*2`. The all-scoped half stays floored. In integer arithmetic ceil(x/n) is -(-x // n).
 
-> **Governance decision (2026-05-19 - #CR-5356)** Rosa: carry-in pressure half — the carry-in half of the ledger pressure score ROUNDS UP while the carry-out half does not: `ledger_pressure_score = (carry_out_ms // 80) + ceil(carry_in_ms / 120) + max(alert_count-1, 0)`. In integer arithmetic ceil(x/n) is -(-x // n).
+> **Governance decision (2026-05-19 - #CR-5356)** Rosa: carry-in pressure half — this entry changes the ROUNDING of the carry-in term only and does not touch any divisor. The carry-in half of the ledger pressure score ROUNDS UP while the carry-out half does not: `ledger_pressure_score = (carry_out_ms // D) + ceil(carry_in_ms / 120) + max(alert_count-1, 0)`, where D is the carry-out divisor fixed by #CR-5331 and is not restated here — read it there. The alert-count term is unchanged. In integer arithmetic ceil(x/n) is -(-x // n).
 
 > **Governance decision (2026-05-19 - #CR-5358)** Rosa: ledger credit — the carry credit applied to the actionable duration ROUNDS UP: `ledger_adjusted_actionable_ms = actionable_duration_ms + ceil(carry_in_ms / 4)`, so a carry smaller than one full step still credits a millisecond. In integer arithmetic ceil(x/n) is -(-x // n).
 
