@@ -3859,3 +3859,13 @@ Historical CSV exports remain archived and non-authoritative for the JSON reconc
 ### Review entry 0941 — dmz lane
 Shift lead logged a routine rotation observation for dmz (west) during review window 0941. Noise review: repeated drift alerts traced to a flapping rotation probe, muted at the source.
 Thread archived; see the #CR decision entries for anything affecting reconciler behavior.
+
+## Late governance close-out (2026-05 review, final)
+
+> **Governance decision (2026-05-28 - #CR-5390)** Rosa: stability probe rounding, final. The ALL-scoped half of the stability (reopen) probe is ROUNDED UP (ceiling); the severity-scoped half keeps its floor, so the two halves of this score round in opposite directions. `stability_pressure_score = ceil(all_probe_ms / 30) + (severity_probe_ms // 20) + max(alert_count - 1, 0)`. In integer arithmetic ceil(x/30) is -(-x // 30). This revises the floored `all_probe_ms // 30` written in #CR-5307, which is superseded on this point only: the probe range [end_ms-180, end_ms+1), the divisors 30 and 20, the severity-scoped floor and the alert-count term are all unchanged. ROUNDING: all_probe_ms // 30 = CEIL.
+
+> **Governance decision (2026-05-29 - #CR-5392)** Rosa: rotation probe rounding, final. The ALL-scoped half of the rotation probe is now ROUNDED UP (ceiling) as well, so BOTH halves of the volatility probe ceil: `volatility_index = stability_pressure_score + ceil(all_rotation_probe_ms / 24) + ceil(severity_rotation_probe_ms / 16) + rotation_segment_count*2`. In integer arithmetic ceil(x/24) is -(-x // 24). This revises the floored `all_rotation_probe_ms // 24` written in #CR-5354, which is superseded on this point only: the probe range [end_ms-240, end_ms+1), the divisors 24 and 16, the severity-scoped ceiling and the segment term are unchanged. ROUNDING: all_rotation_probe_ms // 24 = CEIL.
+
+> **Governance decision (2026-05-30 - #CR-5394)** Yusuf: ledger pressure rounding, final. The carry-OUT half of the ledger pressure score is now ROUNDED UP (ceiling), so BOTH ledger halves ceil: `ledger_pressure_score = ceil(carry_out_ms / 60) + ceil(carry_in_ms / 120) + max(alert_count - 1, 0)`. In integer arithmetic ceil(x/60) is -(-x // 60). This revises the floored `carry_out_ms // 60` recorded in #CR-5331, which is superseded on this point only: the 60 carry-out divisor, the 120 carry-in divisor and the alert term are unchanged. The #CR-5333 worked example predates this correction and floors the carry-out half (it shows 391 // 60 = 6, whereas the final ceiling gives 7), so that figure is stale on this point. ROUNDING: carry_out_ms // 60 = CEIL.
+
+Thread archived; see the #CR decision entries for anything affecting reconciler behavior.

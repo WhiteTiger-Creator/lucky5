@@ -978,7 +978,7 @@ def test_stateful_risk_ledger_propagates_and_decays_between_windows(tmp_path: Pa
         assert summary["max_carry_out_ms"] == 450
         assert len(summary["ledger_checksum"]) == 64
         second_queue = next(row for row in queue if row["ticket_id"] == "lab:600-850")
-        assert second_queue["ledger_pressure_score"] == (450 // 60) + (-(-200 // 120))
+        assert second_queue["ledger_pressure_score"] == (-(-450 // 60)) + (-(-200 // 120))
     finally:
         for path, content in originals.items():
             path.write_text(content, encoding="utf-8")

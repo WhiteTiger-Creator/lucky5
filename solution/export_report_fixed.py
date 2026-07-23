@@ -549,8 +549,10 @@ def build_response_queue(
                 window["end_ms"],
                 reopen_severity,
             )
+            # #CR-5390: the all-scoped half of the stability probe now ROUNDS UP;
+            # the severity half keeps its floor, so the two halves oppose.
             stability_pressure_score = (
-                (all_probe_ms // 30)
+                (-(-all_probe_ms // 30))
                 + (severity_probe_ms // 20)
                 + max(window["alert_count"] - 1, 0)
             )
@@ -565,9 +567,11 @@ def build_response_queue(
                 rotation_severity,
                 lookback_ms=240,
             )
+            # #CR-5392: the all-scoped half of the rotation probe now ROUNDS UP too,
+            # so BOTH halves of the volatility probe ceil.
             volatility_index = (
                 stability_pressure_score
-                + (all_rotation_probe_ms // 24)
+                + (-(-all_rotation_probe_ms // 24))
                 + (-(-severity_rotation_probe_ms // 16))
                 + (window["rotation_segment_count"] * 2)
             )
@@ -587,8 +591,10 @@ def build_response_queue(
                 + (severity_defer_probe_ms // 28)
                 + window["defer_segment_count"]
             )
+            # #CR-5394: the carry-out half of the ledger pressure score now ROUNDS UP,
+            # so BOTH ledger halves ceil (the #CR-5333 worked example predates this).
             ledger_pressure_score = (
-                (window["carry_out_ms"] // 60)
+                (-(-window["carry_out_ms"] // 60))
                 + (-(-window["carry_in_ms"] // 120))
                 + max(window["alert_count"] - 1, 0)
             )
